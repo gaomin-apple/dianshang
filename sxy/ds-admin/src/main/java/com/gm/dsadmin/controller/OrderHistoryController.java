@@ -1,7 +1,7 @@
 package com.gm.dsadmin.controller;
 
-import com.gm.dsadmin.dao.in.OrderHistoryCreateInDTO;
-import com.gm.dsadmin.dao.out.OrderHistoryListOutDTO;
+import com.gm.dsadmin.dto.in.OrderHistoryCreateInDTO;
+import com.gm.dsadmin.dto.out.OrderHistoryListOutDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,9 +1,9 @@
 package com.gm.dsadmin.controller;
 
-import com.gm.dsadmin.dao.in.CustomerSearchInDTO;
-import com.gm.dsadmin.dao.out.CustomerListOutDTO;
-import com.gm.dsadmin.dao.out.CustomerShowOutDTO;
-import com.gm.dsadmin.dao.out.PageOutDTO;
+import com.gm.dsadmin.dto.in.CustomerSearchInDTO;
+import com.gm.dsadmin.dto.out.CustomerListOutDTO;
+import com.gm.dsadmin.dto.out.CustomerShowOutDTO;
+import com.gm.dsadmin.dto.out.PageOutDTO;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

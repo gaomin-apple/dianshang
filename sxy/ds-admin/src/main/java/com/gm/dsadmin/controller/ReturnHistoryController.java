@@ -1,7 +1,7 @@
 package com.gm.dsadmin.controller;
 
-import com.gm.dsadmin.dao.in.ReturnHistoryCreateInDTO;
-import com.gm.dsadmin.dao.out.ReturnHistoryListOutDTO;
+import com.gm.dsadmin.dto.in.ReturnHistoryCreateInDTO;
+import com.gm.dsadmin.dto.out.ReturnHistoryListOutDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

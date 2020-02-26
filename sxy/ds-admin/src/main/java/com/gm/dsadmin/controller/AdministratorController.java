@@ -1,10 +1,10 @@
 package com.gm.dsadmin.controller;
 
-import com.gm.dsadmin.dao.in.*;
-import com.gm.dsadmin.dao.out.AdministratorGetProfileOutDTO;
-import com.gm.dsadmin.dao.out.AdministratorListOutDTO;
-import com.gm.dsadmin.dao.out.AdministratorShowOutDTO;
-import com.gm.dsadmin.dao.out.PageOutDTO;
+import com.gm.dsadmin.dto.in.*;
+import com.gm.dsadmin.dto.out.AdministratorGetProfileOutDTO;
+import com.gm.dsadmin.dto.out.AdministratorListOutDTO;
+import com.gm.dsadmin.dto.out.AdministratorShowOutDTO;
+import com.gm.dsadmin.dto.out.PageOutDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

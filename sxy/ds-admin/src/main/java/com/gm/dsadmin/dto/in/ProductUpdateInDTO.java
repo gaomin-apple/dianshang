@@ -13,8 +13,17 @@ public class ProductUpdateInDTO {
     private String mainPicUrl;
     private Integer rewordPoints;
     private Integer sortOrder;
+    private String productAbssract;
     private String description;
     private List<String> otherPicUrls;
+
+    public String getProductAbssract() {
+        return productAbssract;
+    }
+
+    public void setProductAbssract(String productAbssract) {
+        this.productAbssract = productAbssract;
+    }
 
     public Integer getProductId() {
         return productId;

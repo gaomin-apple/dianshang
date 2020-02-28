@@ -1,9 +1,9 @@
 package com.gm.dscustomer.controller;
 
-import com.gm.dscustomer.dao.in.ReturnApplyInDTO;
-import com.gm.dscustomer.dao.out.PageOutDTO;
-import com.gm.dscustomer.dao.out.ReturnListOutDTO;
-import com.gm.dscustomer.dao.out.ReturnShowOutDTO;
+import com.gm.dscustomer.dto.in.ReturnApplyInDTO;
+import com.gm.dscustomer.dto.out.PageOutDTO;
+import com.gm.dscustomer.dto.out.ReturnListOutDTO;
+import com.gm.dscustomer.dto.out.ReturnShowOutDTO;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

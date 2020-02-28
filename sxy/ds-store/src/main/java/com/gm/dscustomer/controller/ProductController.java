@@ -1,9 +1,9 @@
 package com.gm.dscustomer.controller;
 
-import com.gm.dscustomer.dao.in.ProductSearchInDTO;
-import com.gm.dscustomer.dao.out.PageOutDTO;
-import com.gm.dscustomer.dao.out.ProductListOutDTO;
-import com.gm.dscustomer.dao.out.ProductShowOutDTO;
+import com.gm.dscustomer.dto.in.ProductSearchInDTO;
+import com.gm.dscustomer.dto.out.PageOutDTO;
+import com.gm.dscustomer.dto.out.ProductListOutDTO;
+import com.gm.dscustomer.dto.out.ProductShowOutDTO;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

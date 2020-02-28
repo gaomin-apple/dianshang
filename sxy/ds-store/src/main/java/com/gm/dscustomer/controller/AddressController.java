@@ -1,8 +1,8 @@
 package com.gm.dscustomer.controller;
 
-import com.gm.dscustomer.dao.in.AddressCreateInDTO;
-import com.gm.dscustomer.dao.in.AddressUpdateInDTO;
-import com.gm.dscustomer.dao.out.AddressListOutDTO;
+import com.gm.dscustomer.dto.in.AddressCreateInDTO;
+import com.gm.dscustomer.dto.in.AddressUpdateInDTO;
+import com.gm.dscustomer.dto.out.AddressListOutDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

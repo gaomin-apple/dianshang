@@ -1,7 +1,8 @@
 package com.gm.dscustomer.controller;
 
 import com.gm.dscustomer.dao.in.*;
-import com.gm.dscustomer.dao.out.CustomerGetProfileOutDTO;
+import com.gm.dscustomer.dto.out.CustomerGetProfileOutDTO;
+import com.gm.dscustomer.dto.in.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

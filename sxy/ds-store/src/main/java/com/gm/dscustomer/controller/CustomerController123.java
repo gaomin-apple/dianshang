@@ -1,6 +1,6 @@
 package com.gm.dscustomer.controller;
 
-import com.gm.dscustomer.dao.in.Customer;
+import com.gm.dscustomer.dto.in.Customer;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

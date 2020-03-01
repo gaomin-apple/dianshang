@@ -7,9 +7,10 @@ import com.gm.dscustomer.enumeration.CustomerStatus;
 import com.gm.dscustomer.po.Customer;
 import com.gm.dscustomer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
-
+@Service
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerMapper customerMapper;

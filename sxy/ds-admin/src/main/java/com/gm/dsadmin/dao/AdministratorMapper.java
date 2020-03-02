@@ -1,8 +1,11 @@
 package com.gm.dsadmin.dao;
 
+import com.github.pagehelper.Page;
 import com.gm.dsadmin.po.Administrator;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface AdministratorMapper {
@@ -19,4 +22,8 @@ public interface AdministratorMapper {
     int updateByPrimaryKey(Administrator record);
     // cystin
     Administrator selectByUsername(@Param("username") String username);
+
+    int batchDelete(@Param("administratorIds") List<Integer> administratorIds);
+
+    Page<Administrator> selectList();
 }

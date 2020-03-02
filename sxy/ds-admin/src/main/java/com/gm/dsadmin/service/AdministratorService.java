@@ -1,6 +1,9 @@
 package com.gm.dsadmin.service;
 
+import com.github.pagehelper.Page;
 import com.gm.dsadmin.po.Administrator;
+
+import java.util.List;
 
 public interface AdministratorService {
 
@@ -9,4 +12,12 @@ public interface AdministratorService {
     Administrator getByUsername(String username);
 
     void update(Administrator administrator);
+
+    Integer create(Administrator administrator);
+
+    void delete(Integer administratorId);
+
+    void batchDelete(List<Integer> administratorIds);
+
+    Page<Administrator> getList(Integer pageNum);
 }

@@ -5,8 +5,9 @@ var app = new Vue({
     },
     mounted() {
         console.log('view mounted');
-        var myshoppingCartJson = localStorage['myShoppingCartJson'];
-        this.myShoppingCart = JSON.parse(myshoppingCartJson);
+        var myshopping = localStorage['myShopping'];
+        console.log(myshopping);
+        this.myShoppingCart = myshopping ? JSON.parse(myshopping) : [];
     },
     methods: {
         handleDelete(index, row) {
@@ -17,7 +18,7 @@ var app = new Vue({
         },
         handleUpdate(index, row) {
             console.log('update click');
-            localStorage['myShoppingCartJson'] = JSON.stringify(this.myShoppingCart);
+            localStorage['myShopping'] = JSON.stringify(this.myShoppingCart);
             this.$message.success('修改购物车成功');
         }
     }

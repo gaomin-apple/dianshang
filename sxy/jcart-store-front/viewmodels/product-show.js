@@ -21,8 +21,8 @@ var app = new Vue({
     mounted() {
         console.log('view mounted');
 
-        var myShoppingCartJson = localStorage['myShoppingCartJson'];
-        this.myShoppingCart = myShoppingCartJson ? JSON.parse(myShoppingCartJson) : [];
+        var myShopping = localStorage['myShopping'];
+        this.myShoppingCart = myShopping ? JSON.parse(myShopping) : [];
 
         var url = new URL(location.href);
         this.productId = url.searchParams.get("productId");
@@ -32,12 +32,12 @@ var app = new Vue({
         }
         this.getProductById();
     },
-    methods:{
+    methods: {
         handleAddToCartClick() {
             console.log('add to cart click');
        
-            var myShoppingCartJson = localStorage['myShoppingCartJson'];
-            this.myShoppingCart = myShoppingCartJson ? JSON.parse(myShoppingCartJson) : [];
+            var myShopping = localStorage['myShopping'];
+            this.myShoppingCart = myShopping ? JSON.parse(myShopping) : [];
 
             var cartProduct = this.myShoppingCart.find(p => p.productId === this.productId);
             if(cartProduct){
@@ -52,13 +52,14 @@ var app = new Vue({
                     productName: this.productName,
                     mainPicUrl: this.mainPicUrl,
                     unitPrice: this.price,
+                    discount: this.discount,
                     quantity: this.quantity
                 };
-                this.myShoppingCart.push(newProduct);
+                this.myShoppingCart.push(cartProduct);
 
             }
 
-            localStorage['myShoppingCartJson'] = JSON.stringify(this.myShoppingCart);
+            localStorage['myShopping'] = JSON.stringify(this.myShoppingCart);
             this.$message.success('添加购物车');
         },
         getProductById() {

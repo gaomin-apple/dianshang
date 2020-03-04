@@ -31,6 +31,11 @@ var app = new Vue({
             console.log('update click');
             localStorage['myShopping'] = JSON.stringify(this.myShoppingCart);
             this.$message.success('修改购物车成功');
+        },
+        handleClearCart() {
+            console.log('clear cart click');
+            this.myShoppingCart = [];
+            localStorage.removeItem('myShoppingCartJson');
         }
     }
 })

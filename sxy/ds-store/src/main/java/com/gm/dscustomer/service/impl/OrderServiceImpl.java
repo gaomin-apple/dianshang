@@ -81,6 +81,8 @@ public class OrderServiceImpl implements OrderService {
         orderDetail.setShipPrice(5.0);
         Address shipAddress = addressService.getById(orderCheckoutInDTO.getShipAddressId());
         orderDetail.setShipAddress(shipAddress.getContent());
+//        Address shipAddress = addressService.getById(orderCheckoutInDTO.getShipAddressId());
+//        orderDetail.setShipAddress(shipAddress.getContent());
 
         orderDetail.setPayMethod(orderCheckoutInDTO.getPayMethod());
         orderDetail.setInvoicePrice(allTOtalPrice);

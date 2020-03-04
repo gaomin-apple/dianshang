@@ -24,6 +24,29 @@ var app = new Vue({
         myShoppingCart: [],
         shipPrice: 5.0
     },
+    computed: {
+        totalPrice() {
+            var subTotalPrices = this.myShoppingCart.map(p => {
+                return p.unitPrice * p.discount * p.quantity;
+            });
+            var totalPrice = subTotalPrices.reduce((a, b) => a + b, 0);
+            var totalPriceStr = totalPrice.toFixed(2);
+            totalPrice = parseFloat(totalPriceStr);
+            return totalPrice;
+        },
+        payPrice() {
+            return this.totalPrice + this.shipPrice;
+        },
+        orderProducts() {
+            var orderProducts = this.myShoppingCart.map(p => {
+                var orderProduct = new Object();
+                orderProduct.productId = p.productId;
+                orderProduct.quantity = p.quantity;
+                return orderProduct;
+            });
+            return orderProducts;
+        }
+    },
     mounted() {
         console.log('view mounted');
         this.getMyAddress();
@@ -31,7 +54,7 @@ var app = new Vue({
         var myShopping = localStorage['myShopping'];
         this.myShoppingCart = myShopping ? JSON.parse(myShopping) : [];
     },
-    method: {
+    methods: {
         handleConfirmOrder() {
             console.log('confirm order click');
             this.checkoutOrder();

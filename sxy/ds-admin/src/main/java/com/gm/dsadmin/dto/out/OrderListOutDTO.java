@@ -1,14 +1,20 @@
 package com.gm.dsadmin.dto.out;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.Date;
+
 public class OrderListOutDTO {
     private Long orderId;
     private Integer customerId;
     private String customerName;
     private Byte status;
-    private Double totalPirce;
     private Long createTimestamp;
     private Long updateTimestamp;
-
+    @JsonIgnore
+    private Date createTime;
+    @JsonIgnore
+    private Date updateTime;
 
     public Integer getCustomerId() {
         return customerId;
@@ -24,14 +30,6 @@ public class OrderListOutDTO {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
-    }
-
-    public Double getTotalPirce() {
-        return totalPirce;
-    }
-
-    public void setTotalPirce(Double totalPirce) {
-        this.totalPirce = totalPirce;
     }
 
     public Long getCreateTimestamp() {
@@ -64,5 +62,21 @@ public class OrderListOutDTO {
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

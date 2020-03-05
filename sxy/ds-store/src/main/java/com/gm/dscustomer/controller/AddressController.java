@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/address")
-@CrossOrigin
+@CrossOrigin()
 public class AddressController {
 
     @Autowired

@@ -66,8 +66,17 @@ var app = new Vue({
                     app.myAddresses = response.data;
                 })
                 .catch(function (error) {
+                    // handle error
                     console.log(error);
                 });
+            // axios.get('/address/getCustomerAddress')
+            //     .then(function (response) {
+            //         console.log(response);
+            //         app.myAddresses = response.data;
+            //     })
+            //     .catch(function (error) {
+            //         console.log(error);
+            //     });
         },
         checkoutOrder() {
             axios.post('/order/checkout', {

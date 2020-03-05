@@ -2,6 +2,7 @@ package com.gm.dsadmin.controller;
 
 import com.github.pagehelper.Page;
 import com.gm.dsadmin.dto.in.CustomerSearchInDTO;
+import com.gm.dsadmin.dto.in.CustomerSetStatusInDTO;
 import com.gm.dsadmin.dto.out.CustomerListOutDTO;
 import com.gm.dsadmin.dto.out.CustomerShowOutDTO;
 import com.gm.dsadmin.dto.out.PageOutDTO;
@@ -78,5 +79,10 @@ public class CustomerController {
     @PostMapping("/disable")
     public void disable(@RequestParam Integer customerId){
 
+    }
+
+    @PostMapping("/setStatus")
+    public void setStatus(@RequestBody CustomerSetStatusInDTO customerSetStatusInDTO){
+        customerService.setStatus(customerSetStatusInDTO);
     }
 }

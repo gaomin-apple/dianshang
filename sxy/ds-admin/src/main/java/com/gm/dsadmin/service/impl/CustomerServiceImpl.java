@@ -3,6 +3,7 @@ package com.gm.dsadmin.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.gm.dsadmin.dao.CustomerMapper;
+import com.gm.dsadmin.dto.in.CustomerSetStatusInDTO;
 import com.gm.dsadmin.po.Customer;
 import com.gm.dsadmin.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,13 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getById(Integer customerId) {
         Customer customer = customerMapper.selectByPrimaryKey(customerId);
         return customer;
+    }
+
+    @Override
+    public void setStatus(CustomerSetStatusInDTO customerSetStatusInDTO) {
+        Customer customer = new Customer();
+        customer.setCustomerId(customerSetStatusInDTO.getCustomerId());
+        customer.setStatus(customerSetStatusInDTO.getStatus());
+        customerMapper.updateByPrimaryKeySelective(customer);
     }
 }

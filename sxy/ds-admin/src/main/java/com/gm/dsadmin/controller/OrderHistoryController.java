@@ -2,22 +2,48 @@ package com.gm.dsadmin.controller;
 
 import com.gm.dsadmin.dto.in.OrderHistoryCreateInDTO;
 import com.gm.dsadmin.dto.out.OrderHistoryListOutDTO;
+import com.gm.dsadmin.po.OrderHistory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/orderhistory")
 public class OrderHistoryController {
 
+    @Autowired
+    private OrderHistoryService orderHistoryService;
+
     @GetMapping("/getListByOrderId")
     public List<OrderHistoryListOutDTO> getListByOrderId(@RequestParam Long orderId){
-        return null;
+        List<OrderHistory> orderHistorys =  orderHistoryService.getByOrderId(orderId);
+
+        List<OrderHistoryListOutDTO> orderHistoryListOutDTOS = orderHistorys.stream().map(orderHistory -> {
+            OrderHistoryListOutDTO orderHistoryListOutDTO = new OrderHistoryListOutDTO();
+            orderHistoryListOutDTO.setOrderHistoryId(orderHistory.getOrderHistoryId());
+            orderHistoryListOutDTO.setTimestamp(orderHistory.getTime().getTime());
+            orderHistoryListOutDTO.setOrderStatus(orderHistory.getOrderStatus());
+            orderHistoryListOutDTO.setComment(orderHistory.getComment());
+            orderHistoryListOutDTO.setCustomerNotified(orderHistory.getCustomerNotified());
+            return orderHistoryListOutDTO;
+        }).collect(Collectors.toList());
+        return orderHistoryListOutDTOS;
     }
 
     @PostMapping("/create")
     public Integer create(@RequestBody OrderHistoryCreateInDTO orderHistoryCreateInDTO){
-        return null;
+        OrderHistory orderHistory = new OrderHistory();
+        orderHistory.setOrderId(orderHistoryCreateInDTO.getOrderId());
+        orderHistory.setTime(new Date());
+        orderHistory.setOrderStatus(orderHistoryCreateInDTO.getOrderStatus());
+        orderHistory.setComment(orderHistoryCreateInDTO.getComment());
+        orderHistory.setCustomerNotified(orderHistoryCreateInDTO.getCustomerNotified());
+
+        Long orderHistoryId = orderHistoryService.create(orderHistory);
+        return orderHistoryId;
     }
 
 }

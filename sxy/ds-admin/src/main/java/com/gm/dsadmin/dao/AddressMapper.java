@@ -1,7 +1,10 @@
 package com.gm.dsadmin.dao;
 
 import com.gm.dsadmin.po.Address;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface AddressMapper {
@@ -16,4 +19,7 @@ public interface AddressMapper {
     int updateByPrimaryKeySelective(Address record);
 
     int updateByPrimaryKey(Address record);
+
+    //    custom
+    List<Address> selectByCustomerId(@Param("customerId") Integer customerId);
 }

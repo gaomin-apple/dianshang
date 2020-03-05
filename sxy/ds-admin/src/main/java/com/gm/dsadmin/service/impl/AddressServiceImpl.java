@@ -6,6 +6,8 @@ import com.gm.dsadmin.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AddressServiceImpl implements AddressService {
 
@@ -13,8 +15,14 @@ public class AddressServiceImpl implements AddressService {
     private AddressMapper addressMapper;
 
     @Override
-    public Address getByid(Integer addressId) {
+    public Address getById(Integer addressId) {
         Address address = addressMapper.selectByPrimaryKey(addressId);
         return address;
+    }
+
+    @Override
+    public List<Address> getByCustomerId(Integer customerId) {
+        List<Address> addresses = addressMapper.selectByCustomerId(customerId);
+        return addresses;
     }
 }

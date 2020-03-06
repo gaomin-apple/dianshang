@@ -18,13 +18,6 @@ public class AddressController {
     @Autowired
     private AddressService addressService;
 
-    @GetMapping("/getListByCustomerId")
-    public List<AddressListOutDTO> getListByCustomerId(@RequestParam Integer customerId){
-        List<Address> addresses = addressService.getByCustomerId(customerId);
-
-        return null;
-    }
-
     @GetMapping("/getById")
     public AddressShowOutDTO getById(@RequestParam Integer addressId){
         Address address = addressService.getById(addressId);
@@ -38,7 +31,7 @@ public class AddressController {
     }
 
     @GetMapping("/getListByCustomerId")
-    public List<AddressListOutDTO> getByCustomerId(@RequestParam Integer customerId){
+    public List<AddressListOutDTO> getListByCustomerId(@RequestParam Integer customerId){
         List<Address> addresses = addressService.getByCustomerId(customerId);
         List<AddressListOutDTO> addressListOutDTOS = addresses.stream().map(address -> {
             AddressListOutDTO addressListOutDTO = new AddressListOutDTO();
@@ -49,7 +42,6 @@ public class AddressController {
             addressListOutDTO.setTag(address.getTag());
             return addressListOutDTO;
         }).collect(Collectors.toList());
-
         return addressListOutDTOS;
     }
 }

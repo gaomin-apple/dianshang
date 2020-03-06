@@ -33,9 +33,6 @@
   <insert id="insertSelective" parameterType="com.gm.dsadmin.po.OrderHistory" useGeneratedKeys="true" keyProperty="orderHistoryId">
     insert into jcart_order_history
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="orderHistoryId != null">
-        order_history_id,
-      </if>
       <if test="orderId != null">
         order_id,
       </if>
@@ -53,9 +50,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="orderHistoryId != null">
-        #{orderHistoryId,jdbcType=BIGINT},
-      </if>
       <if test="orderId != null">
         #{orderId,jdbcType=BIGINT},
       </if>

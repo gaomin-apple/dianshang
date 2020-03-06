@@ -3,6 +3,7 @@ package com.gm.dsadmin.controller;
 import com.gm.dsadmin.dto.in.OrderHistoryCreateInDTO;
 import com.gm.dsadmin.dto.out.OrderHistoryListOutDTO;
 import com.gm.dsadmin.po.OrderHistory;
+import com.gm.dsadmin.service.OrderHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/orderhistory")
+@CrossOrigin
 public class OrderHistoryController {
 
     @Autowired
@@ -34,7 +36,7 @@ public class OrderHistoryController {
     }
 
     @PostMapping("/create")
-    public Integer create(@RequestBody OrderHistoryCreateInDTO orderHistoryCreateInDTO){
+    public Long create(@RequestBody OrderHistoryCreateInDTO orderHistoryCreateInDTO){
         OrderHistory orderHistory = new OrderHistory();
         orderHistory.setOrderId(orderHistoryCreateInDTO.getOrderId());
         orderHistory.setTime(new Date());

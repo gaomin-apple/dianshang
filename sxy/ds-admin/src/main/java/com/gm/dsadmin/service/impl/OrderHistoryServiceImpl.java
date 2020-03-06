@@ -4,9 +4,10 @@ import com.gm.dsadmin.dao.OrderHistoryMapper;
 import com.gm.dsadmin.po.OrderHistory;
 import com.gm.dsadmin.service.OrderHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class OrderHistoryServiceImpl implements OrderHistoryService {
     @Autowired
     private OrderHistoryMapper orderHistoryMapper;

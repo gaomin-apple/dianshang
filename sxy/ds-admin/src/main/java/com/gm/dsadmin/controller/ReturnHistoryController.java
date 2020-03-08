@@ -3,6 +3,7 @@ package com.gm.dsadmin.controller;
 import com.gm.dsadmin.dto.in.ReturnHistoryCreateInDTO;
 import com.gm.dsadmin.dto.out.ReturnHistoryListOutDTO;
 import com.gm.dsadmin.po.ReturnHistory;
+import com.gm.dsadmin.service.ReturnHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +13,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/returnhistory")
+@CrossOrigin
 public class ReturnHistoryController {
 
     @Autowired
-    private ReturnHistoryService returnHistoryService;
+   private ReturnHistoryService returnHistoryService;
 
     @GetMapping("/getListByReturnId")
     public List<ReturnHistoryListOutDTO> getListByReturnId(@RequestParam Integer returnId){
@@ -37,7 +39,7 @@ public class ReturnHistoryController {
     public Long create(@RequestBody ReturnHistoryCreateInDTO returnHistoryCreateInDTO){
         ReturnHistory returnHistory = new ReturnHistory();
         returnHistory.setReturnId(returnHistoryCreateInDTO.getReturnId());
-        returnHistory.setTime(new Date);
+        returnHistory.setTime(new Date());
         returnHistory.setReturnStatus(returnHistoryCreateInDTO.getReturnStatus());
         returnHistory.setComment(returnHistoryCreateInDTO.getComment());
         Boolean customerNotifeid = returnHistoryCreateInDTO.getCustomerNotifeid();

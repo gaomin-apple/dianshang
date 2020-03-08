@@ -1,7 +1,9 @@
 package com.gm.dsadmin.dao;
 
 import com.gm.dsadmin.po.ReturnHistory;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ReturnHistoryMapper {
     int deleteByPrimaryKey(Long returnHistoryId);
 

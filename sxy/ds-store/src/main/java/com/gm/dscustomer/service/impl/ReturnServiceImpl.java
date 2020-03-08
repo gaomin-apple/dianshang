@@ -28,4 +28,9 @@ public class ReturnServiceImpl implements ReturnService {
         return page;
     }
 
+    @Override
+    public Return getById(Integer returnId) {
+        Return aReturn = returnMapper.selectByPrimaryKey(returnId);
+        return aReturn;
+    }
 }

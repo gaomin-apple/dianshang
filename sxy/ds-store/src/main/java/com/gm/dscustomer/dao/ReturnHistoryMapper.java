@@ -1,7 +1,10 @@
 package com.gm.dscustomer.dao;
 
 import com.gm.dscustomer.po.ReturnHistory;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface ReturnHistoryMapper {
@@ -11,9 +14,13 @@ public interface ReturnHistoryMapper {
 
     int insertSelective(ReturnHistory record);
 
-    ReturnHistory selectByPrimaryKey(Long returnHistoryId);
+    ReturnHistory selectByPrimaryKey(Integer returnHistoryId);
 
     int updateByPrimaryKeySelective(ReturnHistory record);
 
     int updateByPrimaryKey(ReturnHistory record);
+
+    // custom
+    List<ReturnHistory> selectByReturnId(@Param("returnId") Integer returnId);
+
 }

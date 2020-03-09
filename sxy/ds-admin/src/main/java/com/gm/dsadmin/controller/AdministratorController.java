@@ -11,21 +11,36 @@ import com.gm.dsadmin.po.Administrator;
 import com.gm.dsadmin.service.AdministratorService;
 import com.gm.dsadmin.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.bind.DatatypeConverter;
+import java.security.SecureRandom;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/administrator")
 @CrossOrigin
 public class AdministratorController {
-    @Autowired
-    private AdministratorService administratorService;
 
     @Autowired
     private JWTUtil jwtUtil;
+    @Autowired
+    private AdministratorService administratorService;
+    @Autowired
+    private SecureRandom secureRandom;
+    @Autowired
+    private JavaMailSender  mailSender;
+    @Value("${spring.mail.username")
+    private String fromEmail;
+
+    private Map<String,String> emailPwdRestCodeMap = new HashMap<>();
 
     @GetMapping("/login")
     public AdministratorLoginOutDTO login(AdministratorLoginInDTO administratorLoginInDTO) throws ClientException {
@@ -76,8 +91,16 @@ public class AdministratorController {
     }
 
     @GetMapping("/getPwdResetCode")
-    public String getPwdResetCode(@RequestParam String email){
-        return null;
+    public void getPwdResetCode(@RequestParam String email){
+        byte[] bytes = secureRandom.generateSeed(3);
+        String hex = DatatypeConverter.printHexBinary(bytes);
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(fromEmail);
+        message.setTo(email);
+        message.setSubject("jcart管理员密码重置");
+        message.setText(hex);
+        mailSender.send(message);
+        emailPwdRestCodeMap.put(email,hex);
     }
 
     @PostMapping("/resetPwd")

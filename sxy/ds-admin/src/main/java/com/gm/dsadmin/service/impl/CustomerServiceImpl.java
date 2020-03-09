@@ -3,6 +3,7 @@ package com.gm.dsadmin.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.gm.dsadmin.dao.CustomerMapper;
+import com.gm.dsadmin.dto.in.CustomerSearchInDTO;
 import com.gm.dsadmin.dto.in.CustomerSetStatusInDTO;
 import com.gm.dsadmin.po.Customer;
 import com.gm.dsadmin.service.CustomerService;
@@ -17,9 +18,14 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    public Page<Customer> search(Integer pageNum) {
+    public Page<Customer> search(CustomerSearchInDTO customerSearchInDTO, Integer pageNum) {
         PageHelper.startPage(pageNum,10);
-        Page<Customer> page = customerMapper.search();
+        Page<Customer> page = customerMapper
+                .search(customerSearchInDTO.getUsername(),
+                        customerSearchInDTO.getRealName(),
+                        customerSearchInDTO.getMobile(),
+                        customerSearchInDTO.getEmail(),
+                        customerSearchInDTO.getStatus());
         return page;
     }
 

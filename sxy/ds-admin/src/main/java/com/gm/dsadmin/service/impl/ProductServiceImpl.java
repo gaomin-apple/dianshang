@@ -7,6 +7,7 @@ import com.github.pagehelper.PageHelper;
 import com.gm.dsadmin.dao.ProductDetailMapper;
 import com.gm.dsadmin.dao.ProductMapper;
 import com.gm.dsadmin.dto.in.ProductCreateInDTO;
+import com.gm.dsadmin.dto.in.ProductSearchInDTO;
 import com.gm.dsadmin.dto.in.ProductUpdateInDTO;
 import com.gm.dsadmin.dto.out.ProductListOutDTO;
 import com.gm.dsadmin.dto.out.ProductShowOutDTO;
@@ -100,9 +101,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<ProductListOutDTO> search(Integer pageNum) {
+    public Page<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO, Integer pageNum) {
         PageHelper.startPage(pageNum, 10);
-        Page<ProductListOutDTO> page = productMapper.search();
+        Page<ProductListOutDTO> page = productMapper.search(productSearchInDTO.getProductCode(),
+                productSearchInDTO.getStatus(),
+                productSearchInDTO.getStockQuantity());
         return page;
     }
 

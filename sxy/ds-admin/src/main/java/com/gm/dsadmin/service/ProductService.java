@@ -2,6 +2,7 @@ package com.gm.dsadmin.service;
 
 import com.github.pagehelper.Page;
 import com.gm.dsadmin.dto.in.ProductCreateInDTO;
+import com.gm.dsadmin.dto.in.ProductSearchInDTO;
 import com.gm.dsadmin.dto.in.ProductUpdateInDTO;
 import com.gm.dsadmin.dto.out.ProductListOutDTO;
 import com.gm.dsadmin.dto.out.ProductShowOutDTO;
@@ -18,7 +19,7 @@ public interface ProductService {
 
     void batchDelete(List<Integer> productIds);
 
-    Page<ProductListOutDTO> search(Integer pageNum);
+    Page<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO, Integer pageNum);
 
     ProductShowOutDTO getById(Integer productId);
 }

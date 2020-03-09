@@ -4,6 +4,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.gm.dscustomer.dao.CustomerMapper;
 import com.gm.dscustomer.dto.in.CustomerRegisterInDTO;
 import com.gm.dscustomer.enumeration.CustomerStatus;
+import com.gm.dscustomer.po.Administrator;
 import com.gm.dscustomer.po.Customer;
 import com.gm.dscustomer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +56,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void update(Customer customer) {
         customerMapper.updateByPrimaryKeySelective(customer);
+    }
+
+    @Override
+    public Customer getByEmail(String email) {
+        Customer administrator = customerMapper.selectByEmail(email);
+        return administrator;
     }
 }

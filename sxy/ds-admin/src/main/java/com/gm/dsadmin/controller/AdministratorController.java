@@ -91,7 +91,11 @@ public class AdministratorController {
     }
 
     @GetMapping("/getPwdResetCode")
-    public void getPwdResetCode(@RequestParam String email){
+    public void getPwdResetCode(@RequestParam String email) throws ClientException {
+        Administrator administrator = administratorService.getByEmail(email);
+        if (administrator == null){
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRCODE,ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRMSG);
+        }
         byte[] bytes = secureRandom.generateSeed(3);
         String hex = DatatypeConverter.printHexBinary(bytes);
         SimpleMailMessage message = new SimpleMailMessage();

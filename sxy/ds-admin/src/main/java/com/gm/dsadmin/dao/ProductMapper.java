@@ -26,5 +26,6 @@ public interface ProductMapper {
 
     Page<ProductListOutDTO> search(@Param("productCode") String productCode,
                                    @Param("status") Byte status,
-                                   @Param("stockQuantity") Integer stpclQiamtotu);
+                                   @Param("stockQuantity") Integer stpclQiamtotu,
+                                   @Param("price") Double price);
 }

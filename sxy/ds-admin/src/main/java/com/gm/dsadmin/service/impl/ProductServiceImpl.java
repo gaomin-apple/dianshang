@@ -105,7 +105,8 @@ public class ProductServiceImpl implements ProductService {
         PageHelper.startPage(pageNum, 10);
         Page<ProductListOutDTO> page = productMapper.search(productSearchInDTO.getProductCode(),
                 productSearchInDTO.getStatus(),
-                productSearchInDTO.getStockQuantity());
+                productSearchInDTO.getStockQuantity(),
+                productSearchInDTO.getPrice());
         return page;
     }
 

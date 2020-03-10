@@ -31,12 +31,16 @@ public class AdministratorController {
 
     @Autowired
     private JWTUtil jwtUtil;
+
     @Autowired
     private AdministratorService administratorService;
+
     @Autowired
     private SecureRandom secureRandom;
+
     @Autowired
     private JavaMailSender  mailSender;
+
     @Value("${spring.mail.username")
     private String fromEmail;
 

@@ -5,7 +5,6 @@ import com.github.pagehelper.Page;
 import com.gm.dsadmin.constant.ClientExceptionConstant;
 import com.gm.dsadmin.dto.in.*;
 import com.gm.dsadmin.dto.out.*;
-import com.gm.dsadmin.enumeration.AdministratorStatus;
 import com.gm.dsadmin.exception.ClientException;
 import com.gm.dsadmin.po.Administrator;
 import com.gm.dsadmin.service.AdministratorService;
@@ -184,7 +183,7 @@ public class AdministratorController {
         administrator.setRealName(administratorCreateInDTO.getRealName());
         administrator.setEmail(administratorCreateInDTO.getEmail());
         administrator.setAvatarUrl(administratorCreateInDTO.getAvatarUrl());
-        administrator.setStatus((byte) AdministratorStatus.Enable.ordinal());
+        administrator.setStatus(administratorCreateInDTO.getStatus());
         administrator.setCreateTime(new Date());
         String bcryptHashString = BCrypt.withDefaults().hashToString(12, administratorCreateInDTO.getPassword().toCharArray());
         administrator.setEncryptedPassword(bcryptHashString);

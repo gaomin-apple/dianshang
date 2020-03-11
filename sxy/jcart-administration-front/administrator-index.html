@@ -21,7 +21,10 @@
         </el-table-column>
         <el-table-column prop="realName" label="姓名">
         </el-table-column>
-        <el-table-column prop="status" label="状态">
+        <el-table-column  label="状态">
+            <teamp slot-scope="scope">
+                {{staztuses[scope.row.status]}}
+            </teamp>
         </el-table-column>
         <el-table-column prop="createTimestamp" label="创建时间">
         </el-table-column>

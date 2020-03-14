@@ -3,12 +3,12 @@ var app = new Vue({
     data: {
         pageInfo: {},
         pageNum: 1,
-        selectedAdministrators: [],
+        selectedAdministratorIds: [],
         statuses: ['禁用','启用']
     },
     computed: {
-        selectedAdministrators() {
-            return this.selectedAdministrators.map(a => a.administratorId);
+        selectedAdministratorIds() {
+            return this.selectedAdministratorIds.map(a => a.administratorId);
         }
     },
     mounted() {
@@ -51,7 +51,7 @@ var app = new Vue({
         },
         handleSelectionChange(val) {
             console.log('selection change', val);
-            this.selectedAdministrators = val;
+            this.selectedAdministratorIds = val;
         },
         batchDeleteAdministrators() {
             axios.post('/administrator/batchDelete', this.selectedAdministratorIds)

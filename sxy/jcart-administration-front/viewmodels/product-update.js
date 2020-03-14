@@ -143,7 +143,7 @@ var app = new Vue({
                     app.selectedStatus = product.status;
                     app.rewordPoints = product.rewordPoints;
                     app.sortOrder = product.sortOrder;
-                    app.productAbstract: this.productAbstract,
+                    app.productAbstract= this.productAbstract,
                     app.mainPicUrl = product.mainPicUrl;
                     app.description = product.description;
                     tinymce.init({

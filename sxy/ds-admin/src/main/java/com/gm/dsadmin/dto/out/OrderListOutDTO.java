@@ -11,10 +11,20 @@ public class OrderListOutDTO {
     private Byte status;
     private Long createTimestamp;
     private Long updateTimestamp;
+    private Double totalPrice;
     @JsonIgnore
     private Date createTime;
     @JsonIgnore
     private Date updateTime;
+
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     public Integer getCustomerId() {
         return customerId;

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1b9857ad-f7e9-4263-ba5d-ac92f7d44054" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/$CACHE_FILE$" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ds-admin/src/main/java/com/gm/dsadmin/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ds-admin/src/main/java/com/gm/dsadmin/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ds-admin/src/main/java/com/gm/dsadmin/dto/in/OrderSearchInDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/ds-admin/src/main/java/com/gm/dsadmin/dto/in/OrderSearchInDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ds-admin/src/main/java/com/gm/dsadmin/dto/out/OrderListOutDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/ds-admin/src/main/java/com/gm/dsadmin/dto/out/OrderListOutDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jcart-administration-front/address-show.html" beforeDir="false" afterPath="$PROJECT_DIR$/jcart-administration-front/address-show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jcart-administration-front/administrator-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/jcart-administration-front/administrator-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jcart-administration-front/administrator-update.html" beforeDir="false" afterPath="$PROJECT_DIR$/jcart-administration-front/administrator-update.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jcart-administration-front/customer-show.html" beforeDir="false" afterPath="$PROJECT_DIR$/jcart-administration-front/customer-show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jcart-administration-front/order-show.html" beforeDir="false" afterPath="$PROJECT_DIR$/jcart-administration-front/order-show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jcart-administration-front/return-show.html" beforeDir="false" afterPath="$PROJECT_DIR$/jcart-administration-front/return-show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jcart-administration-front/viewmodels/address-show.js" beforeDir="false" afterPath="$PROJECT_DIR$/jcart-administration-front/viewmodels/address-show.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jcart-administration-front/viewmodels/administrator-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/jcart-administration-front/viewmodels/administrator-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jcart-administration-front/viewmodels/administrator-update.js" beforeDir="false" afterPath="$PROJECT_DIR$/jcart-administration-front/viewmodels/administrator-update.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jcart-administration-front/viewmodels/order-show.js" beforeDir="false" afterPath="$PROJECT_DIR$/jcart-administration-front/viewmodels/order-show.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jcart-administration-front/viewmodels/product-update.js" beforeDir="false" afterPath="$PROJECT_DIR$/jcart-administration-front/viewmodels/product-update.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+    <option name="PARALLEL_COMPILATION" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="E:\mavenalibaba" />
+        <option name="mavenHome" value="E:/utils/apache-maven-3.6.1" />
+        <option name="userSettingsFile" value="E:\utils\apache-maven-3.6.1\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Z1u4Vfe3Nwc29wEJkyuL0eFqVV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ds-store" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1b9857ad-f7e9-4263-ba5d-ac92f7d44054" name="Default Changelist" comment="" />
+      <created>1584018729519</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584018729519</updated>
+      <workItem from="1584018731543" duration="40000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="680" y="295" key="FileChooserDialogImpl" timestamp="1584018768695">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="680" y="295" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584018768695" />
+  </component>
+</project>

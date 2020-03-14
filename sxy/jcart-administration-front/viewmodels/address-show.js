@@ -18,7 +18,7 @@ var app = new Vue({
     },
     methods: {
         getAddressById(){
-            axuis.get('/address/getById' ,{
+            axios.get('/address/getById' ,{
                 params: {
                     addressId : this.addressId
                 }
@@ -27,7 +27,7 @@ var app = new Vue({
                 console.log(response);
                 var address = response.data;
                 app.tag = address.tag;
-                app.conntent = address.conntent;
+                app.conntent = address.content;
                 app.receiverName = address.receiverName;
                 app.receiverMobile = address.receiverMobile;
             })

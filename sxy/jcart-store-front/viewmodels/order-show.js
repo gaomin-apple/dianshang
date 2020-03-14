@@ -49,7 +49,7 @@ var app = new Vue({
     mounted() {
         console.log('view mounted');
 
-        var url = new RUL(location.href);
+        var url = new URL(location.href);
         this.orderId = url.searchParams.get("orderId");
         if(!this.orderId) {
             alert('orderId is null');

@@ -17,7 +17,7 @@ var app = new Vue({
         console.log('view mounted');
 
         var url = new URL(location.href);
-        this.administratorId = url.get("administratorId");
+        this.administratorId = url.searchParams.get("administratorId");
         if(!this.administratorId){
             alert('administratorId is null');
             return;

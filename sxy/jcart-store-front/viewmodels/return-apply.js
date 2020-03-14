@@ -60,28 +60,28 @@ var app = new Vue({
             .catch(function (error) {
                 console.log(error);
             });
+        },
+        applyReturn() {
+            axios.post('/return/apply',{
+                orderId: this.orderId,
+                orderTimestamp: this.orderTimestamp,
+                customerName: this.customerName,
+                mobile: this.mobile,
+                email: this.email,
+                productCode: this.productCode,
+                productName: this.productName,
+                quantity: this.quantity,
+                reason: this.reason,
+                opened: this.opened,
+                comment: this.comment
+            })
+            .then(function (response) {
+                console.log(response);
+                alert('申请成功，请等待处理');
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         }
-    },
-    applyReturn() {
-        axios.post('/return/apply',{
-            orderId: this.orderId,
-            orderTimestamp: this.orderTimestamp,
-            customerName: this.customerName,
-            mobile: this.mobile,
-            email: this.email,
-            productCode: this.productCode,
-            productName: this.productName,
-            quantity: this.quantity,
-            reason: this.reason,
-            opened: this.opened,
-            comment: this.comment
-        })
-        .then(function (response) {
-            console.log(response);
-            alert('申请成功，请等待处理');
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
     }
 })

@@ -35,7 +35,9 @@ public class ReturnController {
         Return aReturn = new Return();
         aReturn.setOrderId(returnApplyInDTO.getOrderId());
         aReturn.setOrderTime(new Date(returnApplyInDTO.getOrderTimestamp()));
+        aReturn.setCustomerId(customerId);
         aReturn.setCustomerName(returnApplyInDTO.getCustomerName());
+        aReturn.setProductName(returnApplyInDTO.getProductName());
         aReturn.setMobile(returnApplyInDTO.getMobile());
         aReturn.setEmail(returnApplyInDTO.getEmail());
         aReturn.setStatus((byte)ReturnStatus.ToProcess.ordinal());
@@ -48,8 +50,8 @@ public class ReturnController {
         Date now = new Date();
         aReturn.setCreateTime(now);
         aReturn.setUpdateTime(now);
-        returnService.create(aReturn);
-        Integer returnId = aReturn.getReturnId();
+        Integer returnId = returnService.create(aReturn);
+        aReturn.getReturnId();
         return returnId;
     }
 

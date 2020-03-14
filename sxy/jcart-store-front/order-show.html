@@ -13,7 +13,7 @@
 <div id="app">
     订单Id：{{orderId}}<br>
     订单状态：{{statuses[status].label}}<br>
-    总价：{{totalPrice}}<br>
+    总价：{{totalPrice.toFixed(2)}}<br>
     积分：{{rewordPoints}}<br>
     下单时间：{{(new Date(createTimestamp)).toLocaleString()}}<br>
     更新时间：{{(new Date(updateTimestamp)).toLocaleString()}}<br>
@@ -22,7 +22,7 @@
     寄送费用：{{shipPrice}}<br>
     支付方式：{{payMethods[payMethod].label}}<br>
     发票地址：{{invoiceAddress}}<br>
-    发票金额：{{invoicePrice}}<br>
+    发票金额：{{invoicePrice.toFixed(2)}}<br>
     备注：{{comment}}<br>
     <br>
     订单商品
@@ -41,9 +41,9 @@
         <el-table-column prop="totalPrice" label="总计">
         </el-table-column>
     </el-table>
-    总价：{{totalPrice}}<br>
+    总价：{{totalPrice.toFixed(2)}}<br>
     寄送费用：{{shipPrice}}<br>
-    师傅费用：{{totalPrice + shipPrice}} <br>
+    师傅费用：{{totalPrice + shipPrice.toFixed(2)}} <br>
     <br>
 
     订单历史

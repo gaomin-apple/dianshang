@@ -32,7 +32,7 @@ public class ReturnHistoryController {
         return returnHistoryListOutDTO;
     }).collect(Collectors.toList());
 
-        return null;
+        return returnHistoryListOutDTOS;
     }
 
     @PostMapping("/create")
@@ -47,9 +47,9 @@ public class ReturnHistoryController {
         Long returnHistoryId = returnHistoryService.create(returnHistory);
 
         if(customerNotifeid != null && customerNotifeid){
-
         }
         return returnHistoryId;
+
     }
 
 }

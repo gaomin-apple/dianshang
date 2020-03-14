@@ -91,7 +91,7 @@ public class OrderServiceImpl implements OrderService {
         orderDetail.setInvoiceAddress(invoiceAddress.getContent());
 
         orderDetail.setComment(orderCheckoutInDTO.getComment());
-        orderDetail.setOrderProducts(JSON.toJSONString(orderProductInDTOS));
+        orderDetail.setOrderProducts(JSON.toJSONString(orderProductVOS));
         orderDetailMapper.insertSelective(orderDetail);
         return orderId;
     }

@@ -1,7 +1,7 @@
 var app = new Vue({
     el: '#app',
     data: {
-        pageInfo: '',
+        pageInfo: [],
         orderId: '',
         customerName: '',
         totalPrice: '',

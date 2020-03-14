@@ -32,10 +32,11 @@ var app = new Vue({
             this.createReturnHistory();
         },
         createReturnHistory() {
+            console.log('+++++',this.customerNotified);
             axios.post('/returnhistory/create', {
                 returnId: this.returnId,
                 returnStatus: this.selectedReturnStatus,
-                customerNotified: this.customerNotified,
+                customerNotifeid: this.customerNotified,
                 comment: this.comment,
             })
                 .then(function (response) {

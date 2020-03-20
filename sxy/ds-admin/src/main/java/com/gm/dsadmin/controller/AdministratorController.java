@@ -12,15 +12,15 @@ import com.gm.dsadmin.util.EmailUtil;
 import com.gm.dsadmin.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.DatatypeConverter;
 import java.security.SecureRandom;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @RestController
@@ -44,7 +44,10 @@ public class AdministratorController {
     @Value("${spring.mail.username}")
     private String fromEmail;
 
-    private Map<String,String> emailPwdRestCodeMap = new HashMap<>();
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
+
+    //private Map<String,String> emailPwdRestCodeMap = new HashMap<>();
 
     @GetMapping("/login")
     public AdministratorLoginOutDTO login(AdministratorLoginInDTO administratorLoginInDTO) throws ClientException {
@@ -102,8 +105,11 @@ public class AdministratorController {
         }
         byte[] bytes = secureRandom.generateSeed(3);
         String hex = DatatypeConverter.printHexBinary(bytes);
+
         emailUtil.send(fromEmail,email,"jcart管理员密码重置",hex);
-        emailPwdRestCodeMap.put(email,hex);
+        redisTemplate.opsForValue().set("EmailReset"+email,hex,1L, TimeUnit.MINUTES);
+
+        //emailPwdRestCodeMap.put(email,hex);
     }
 
     @PostMapping("/resetPwd")
@@ -112,7 +118,8 @@ public class AdministratorController {
        if (email == null){
            throw new ClientException(ClientExceptionConstant.ADNINISTRATOR_PWDRESET_EMAIL_NONE_ERRCODE,ClientExceptionConstant.ADNINISTRATOR_PWDRESET_EMAIL_NONE_ERRMSG);
        }
-       String innerResetCode = emailPwdRestCodeMap.get(email);
+//       String innerResetCode = emailPwdRestCodeMap.get(email);
+        String innerResetCode = redisTemplate.opsForValue().get("EmailReset" + email);
         if (innerResetCode == null) {
             throw new ClientException(ClientExceptionConstant.ADNINISTRATOR_PWDRESET_INNER_RESETCODE_NONE_ERRCODE, ClientExceptionConstant.ADNINISTRATOR_PWDRESET_INNER_RESETCODE_NONE_ERRMSG);
         }
@@ -135,7 +142,8 @@ public class AdministratorController {
         String bcryptHashString = BCrypt.withDefaults().hashToString(12,newPwd.toCharArray());
         administrator.setEncryptedPassword(bcryptHashString);
         administratorService.update(administrator);
-        emailPwdRestCodeMap.remove(email);
+//        emailPwdRestCodeMap.remove(email);
+        redisTemplate.delete("EmailReset"+email);
     }
 
     @GetMapping("/getList")

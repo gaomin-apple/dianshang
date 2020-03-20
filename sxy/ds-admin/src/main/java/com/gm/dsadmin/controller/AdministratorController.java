@@ -8,10 +8,10 @@ import com.gm.dsadmin.dto.out.*;
 import com.gm.dsadmin.exception.ClientException;
 import com.gm.dsadmin.po.Administrator;
 import com.gm.dsadmin.service.AdministratorService;
+import com.gm.dsadmin.util.EmailUtil;
 import com.gm.dsadmin.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +30,8 @@ public class AdministratorController {
 
     @Autowired
     private JWTUtil jwtUtil;
-
+    @Autowired
+    private EmailUtil emailUtil;
     @Autowired
     private AdministratorService administratorService;
 
@@ -40,7 +41,7 @@ public class AdministratorController {
     @Autowired
     private JavaMailSender  mailSender;
 
-    @Value("${spring.mail.username")
+    @Value("${spring.mail.username}")
     private String fromEmail;
 
     private Map<String,String> emailPwdRestCodeMap = new HashMap<>();
@@ -101,12 +102,7 @@ public class AdministratorController {
         }
         byte[] bytes = secureRandom.generateSeed(3);
         String hex = DatatypeConverter.printHexBinary(bytes);
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(fromEmail);
-        message.setTo(email);
-        message.setSubject("jcart管理员密码重置");
-        message.setText(hex);
-        mailSender.send(message);
+        emailUtil.send(fromEmail,email,"jcart管理员密码重置",hex);
         emailPwdRestCodeMap.put(email,hex);
     }
 

@@ -20,21 +20,24 @@
                     我的<i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item v-for="item in my" :key="item.route" :divided="item.divided" :command="item.route">{{item.name}}</el-dropdown-item>
+                    <el-dropdown-item v-for="item in my" :key="item.route" :divided="item.divided"
+                                      :command="item.route">{{item.name}}
+                    </el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </el-header>
         <el-container>
             <el-aside width="200px">
                 <el-menu unique-opened router background-color="#545c64" text-color="#fff"
-                    active-text-color="#ffd04b">
+                         active-text-color="#ffd04b">
                     <el-submenu v-for="subMenu in subMenus" :key="subMenu.index" :index="subMenu.index">
                         <template slot="title">
                             <i :class="subMenu.icon"></i>
                             <span>{{subMenu.name}}</span>
                         </template>
                         <el-menu-item v-for="menuItem in subMenu.menuItems" :key="menuItem.index"
-                            :index="menuItem.index" :route="menuItem.route">{{menuItem.name}}</el-menu-item>
+                                      :index="menuItem.index" :route="menuItem.route">{{menuItem.name}}
+                        </el-menu-item>
                     </el-submenu>
                 </el-menu>
             </el-aside>

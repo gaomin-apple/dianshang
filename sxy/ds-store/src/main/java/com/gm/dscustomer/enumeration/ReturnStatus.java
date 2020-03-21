@@ -1,6 +1,6 @@
 package com.gm.dscustomer.enumeration;
 
-public enum  ReturnStatus {
+public enum ReturnStatus {
     ToProcess,
     ToGetBackProduct,
     Processing,

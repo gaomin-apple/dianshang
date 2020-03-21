@@ -17,26 +17,26 @@ import java.util.stream.Collectors;
 public class ReturnHistoryController {
 
     @Autowired
-   private ReturnHistoryService returnHistoryService;
+    private ReturnHistoryService returnHistoryService;
 
     @GetMapping("/getListByReturnId")
-    public List<ReturnHistoryListOutDTO> getListByReturnId(@RequestParam Integer returnId){
-    List<ReturnHistory> returnHistories = returnHistoryService.getListByReturnId(returnId);
-    List<ReturnHistoryListOutDTO> returnHistoryListOutDTOS = returnHistories.stream().map(returnHistory -> {
-        ReturnHistoryListOutDTO returnHistoryListOutDTO = new ReturnHistoryListOutDTO();
-        returnHistoryListOutDTO.setReturnHistoryId(returnHistory.getReturnHistoryId());
-        returnHistoryListOutDTO.setTimestamp(returnHistory.getTime().getTime());
-        returnHistoryListOutDTO.setReturnStatus(returnHistory.getReturnStatus());
-        returnHistoryListOutDTO.setComment(returnHistory.getComment());
-        returnHistoryListOutDTO.setCustomerNotified(returnHistory.getCustomerNotified());
-        return returnHistoryListOutDTO;
-    }).collect(Collectors.toList());
+    public List<ReturnHistoryListOutDTO> getListByReturnId(@RequestParam Integer returnId) {
+        List<ReturnHistory> returnHistories = returnHistoryService.getListByReturnId(returnId);
+        List<ReturnHistoryListOutDTO> returnHistoryListOutDTOS = returnHistories.stream().map(returnHistory -> {
+            ReturnHistoryListOutDTO returnHistoryListOutDTO = new ReturnHistoryListOutDTO();
+            returnHistoryListOutDTO.setReturnHistoryId(returnHistory.getReturnHistoryId());
+            returnHistoryListOutDTO.setTimestamp(returnHistory.getTime().getTime());
+            returnHistoryListOutDTO.setReturnStatus(returnHistory.getReturnStatus());
+            returnHistoryListOutDTO.setComment(returnHistory.getComment());
+            returnHistoryListOutDTO.setCustomerNotified(returnHistory.getCustomerNotified());
+            return returnHistoryListOutDTO;
+        }).collect(Collectors.toList());
 
         return returnHistoryListOutDTOS;
     }
 
     @PostMapping("/create")
-    public Long create(@RequestBody ReturnHistoryCreateInDTO returnHistoryCreateInDTO){
+    public Long create(@RequestBody ReturnHistoryCreateInDTO returnHistoryCreateInDTO) {
         ReturnHistory returnHistory = new ReturnHistory();
         returnHistory.setReturnId(returnHistoryCreateInDTO.getReturnId());
         returnHistory.setTime(new Date());
@@ -46,7 +46,7 @@ public class ReturnHistoryController {
         returnHistory.setCustomerNotified(customerNotifeid);
         Long returnHistoryId = returnHistoryService.create(returnHistory);
 
-        if(customerNotifeid != null && customerNotifeid){
+        if (customerNotifeid != null && customerNotifeid) {
         }
         return returnHistoryId;
 

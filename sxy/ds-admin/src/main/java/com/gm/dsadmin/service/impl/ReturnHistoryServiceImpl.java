@@ -18,6 +18,7 @@ public class ReturnHistoryServiceImpl implements ReturnHistoryService {
     private ReturnHistoryMapper returnHistoryMapper;
     @Autowired
     private ReturnService returnService;
+
     @Override
     public List<ReturnHistory> getListByReturnId(Integer returnId) {
         List<ReturnHistory> returnHistories = returnHistoryMapper.selectListByReturnId(returnId);

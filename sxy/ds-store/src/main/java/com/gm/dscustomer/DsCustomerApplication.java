@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("com.gm.dscustomer.dao")
 public class DsCustomerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DsCustomerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DsCustomerApplication.class, args);
+    }
 
 }

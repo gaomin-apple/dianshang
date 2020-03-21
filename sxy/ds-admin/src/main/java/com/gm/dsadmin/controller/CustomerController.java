@@ -29,8 +29,8 @@ public class CustomerController {
 
     @GetMapping("/search")
     public PageOutDTO<CustomerListOutDTO> search(CustomerSearchInDTO customerSearchInDTO,
-                                                 @RequestParam(required = false,defaultValue = "1") Integer pageNum){
-        Page<Customer> page = customerService.search(customerSearchInDTO,pageNum);
+                                                 @RequestParam(required = false, defaultValue = "1") Integer pageNum) {
+        Page<Customer> page = customerService.search(customerSearchInDTO, pageNum);
         List<CustomerListOutDTO> customerListOutDTOS = page.stream().map(customer -> {
             CustomerListOutDTO customerListOutDTO = new CustomerListOutDTO();
             customerListOutDTO.setCustomerId(customer.getCustomerId());
@@ -53,7 +53,7 @@ public class CustomerController {
     }
 
     @GetMapping("/getById")
-    public CustomerShowOutDTO getById(@RequestParam Integer customerId){
+    public CustomerShowOutDTO getById(@RequestParam Integer customerId) {
 
         Customer customer = customerService.getById(customerId);
         CustomerShowOutDTO customerShowOutDTO = new CustomerShowOutDTO();
@@ -71,19 +71,19 @@ public class CustomerController {
         customerShowOutDTO.setDefaultAddressId(customer.getDefaultAddressId());
 
         Address defaultAddress = addressService.getById(customer.getDefaultAddressId());
-        if (defaultAddress != null){
+        if (defaultAddress != null) {
             customerShowOutDTO.setDefaultAddress(defaultAddress.getContent());
         }
         return customerShowOutDTO;
     }
 
     @PostMapping("/disable")
-    public void disable(@RequestParam Integer customerId){
+    public void disable(@RequestParam Integer customerId) {
 
     }
 
     @PostMapping("/setStatus")
-    public void setStatus(@RequestBody CustomerSetStatusInDTO customerSetStatusInDTO){
+    public void setStatus(@RequestBody CustomerSetStatusInDTO customerSetStatusInDTO) {
         customerService.setStatus(customerSetStatusInDTO);
     }
 }

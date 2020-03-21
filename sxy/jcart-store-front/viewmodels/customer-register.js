@@ -13,7 +13,7 @@ var app = new Vue({
         handleRegisterClick() {
             console.log('register click');
 
-            if(this.password != this.repassword) {
+            if (this.password != this.repassword) {
                 alert('密码不一致');
                 return;
             }
@@ -28,13 +28,13 @@ var app = new Vue({
                 password: this.password,
                 newsSubscribed: this.newsSubscribed
             })
-            .then(function (response) {
-                console.log(response);
-                alert('注册成功');
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+                .then(function (response) {
+                    console.log(response);
+                    alert('注册成功');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     }
 })

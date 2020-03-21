@@ -34,7 +34,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
         final String method = request.getMethod();
-        if (method.equals("OPTIONS")){
+        if (method.equals("OPTIONS")) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
@@ -59,7 +59,7 @@ public class LoginFilter implements Filter {
         CustomerLoginVO administratorLoginVO = null;
         try {
             administratorLoginVO = jwtUtil.verifyToken(token);
-        }catch (JWTVerificationException ex){
+        } catch (JWTVerificationException ex) {
             throw new ClientException(ClientExceptionConstant.TOKEN_INVALID_ERRCODE, ex.getMessage());
         }
 

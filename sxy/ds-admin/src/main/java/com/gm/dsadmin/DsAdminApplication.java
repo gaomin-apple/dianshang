@@ -10,8 +10,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableAsync
 public class DsAdminApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DsAdminApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DsAdminApplication.class, args);
+    }
 
 }

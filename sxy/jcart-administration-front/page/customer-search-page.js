@@ -49,9 +49,9 @@ Vue.component('jc-customer-search-page', {
             pageInfo: '',
             pageNum: 1,
             statuses: [
-                { value: 0, label: '禁用' },
-                { value: 1, label: '启用' },
-                { value: 2, label: '不安全' }
+                {value: 0, label: '禁用'},
+                {value: 1, label: '启用'},
+                {value: 2, label: '不安全'}
             ],
             username: '',
             realName: '',

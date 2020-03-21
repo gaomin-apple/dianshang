@@ -20,6 +20,7 @@ public interface AdministratorMapper {
     int updateByPrimaryKeySelective(Administrator record);
 
     int updateByPrimaryKey(Administrator record);
+
     // cystin
     Administrator selectByUsername(@Param("username") String username);
 

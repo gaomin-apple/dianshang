@@ -8,44 +8,44 @@ var app = new Vue({
         mobileVerified: '',
         emailVerified: ''
     },
-    mounted(){
+    mounted() {
         console.log('view mounted');
         this.getMyProfile();
     },
-    methods:{
-        handleUpdateClick(){
+    methods: {
+        handleUpdateClick() {
             console.log('update clck');
             this.updateMyProfile();
         },
-        getMyProfile(){
+        getMyProfile() {
             axios.get('/customer/getProfile')
-            .then(function (response) {
-                console.log(response);
-                var me = response.data;
-                app.username = me.username;
-                app.realName = me.realName;
-                app.mobile = me.mobile;
-                app.mobileVerified = me.mobileVerified;
-                app.email = me.email;
-                app.emailVerified = me.emailVerified;
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+                .then(function (response) {
+                    console.log(response);
+                    var me = response.data;
+                    app.username = me.username;
+                    app.realName = me.realName;
+                    app.mobile = me.mobile;
+                    app.mobileVerified = me.mobileVerified;
+                    app.email = me.email;
+                    app.emailVerified = me.emailVerified;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
         },
         updateMyProfile() {
-            axios.post('/customer/updateProfile',{
-                realName:this.realName,
+            axios.post('/customer/updateProfile', {
+                realName: this.realName,
                 mobile: this.mobile,
                 email: this.email
             })
-            .then(function (response) {
-                console.log(response);
-                alert('跟新成功');
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+                .then(function (response) {
+                    console.log(response);
+                    alert('跟新成功');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     }
 })

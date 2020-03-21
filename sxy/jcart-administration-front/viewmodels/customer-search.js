@@ -2,11 +2,11 @@ var app = new Vue({
     el: '#app',
     data: {
         pageInfo: {},
-        pageNum:1,
+        pageNum: 1,
         statuses: [
-            { value: 0, label: '禁用' },
-            { value: 1, label: '启用' },
-            { value: 2, label: '不安全' }
+            {value: 0, label: '禁用'},
+            {value: 1, label: '启用'},
+            {value: 2, label: '不安全'}
         ],
         username: '',
         realName: '',
@@ -37,9 +37,9 @@ var app = new Vue({
             this.pageNum = val;
             this.searchCustomer();
         },
-        handleUpdateStatus(index, row){
+        handleUpdateStatus(index, row) {
             console.log('update status click');
-            this.updateCustomerStatus(row.customerId,row.status);
+            this.updateCustomerStatus(row.customerId, row.status);
         },
         searchCustomer() {
             axios.get('/customer/search', {

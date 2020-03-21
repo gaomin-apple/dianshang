@@ -23,9 +23,9 @@ public class ReturnController {
     @Autowired
     private ReturnService returnService;
 
-    @GetMapping("/search")                     
-    public PageOutDTO<ReturnListOutDTO> search(ReturnSearchInDTO returnSearchInDTO,  @RequestParam(required = false, defaultValue = "1") Integer pageNum){
-        Page<Return> page = returnService.search(returnSearchInDTO,pageNum);
+    @GetMapping("/search")
+    public PageOutDTO<ReturnListOutDTO> search(ReturnSearchInDTO returnSearchInDTO, @RequestParam(required = false, defaultValue = "1") Integer pageNum) {
+        Page<Return> page = returnService.search(returnSearchInDTO, pageNum);
         List<ReturnListOutDTO> returnListOutDTOS = page.stream().map(aReturn -> {
             ReturnListOutDTO returnListOutDTO = new ReturnListOutDTO();
             returnListOutDTO.setReturnId(aReturn.getReturnId());
@@ -48,7 +48,7 @@ public class ReturnController {
     }
 
     @GetMapping("/getById")
-    public ReturnShowOutDTO getById(@RequestParam Integer returnId){
+    public ReturnShowOutDTO getById(@RequestParam Integer returnId) {
 
         Return aReturn = returnService.getById(returnId);
         ReturnShowOutDTO returnShowOutDTO = new ReturnShowOutDTO();
@@ -73,7 +73,7 @@ public class ReturnController {
     }
 
     @PostMapping("/updateAction")
-    public void updateAction(@RequestBody ReturnUpdateActionInDTO returnUpdateActionInDTO){
+    public void updateAction(@RequestBody ReturnUpdateActionInDTO returnUpdateActionInDTO) {
 
         Return aReturn = new Return();
         aReturn.setReturnId(returnUpdateActionInDTO.getReturnId());

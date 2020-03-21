@@ -16,8 +16,8 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping("/search")
-    public PageOutDTO<OrderListOutDTO> search(OrderSearchInDTO orderSearchInDTO,@RequestParam(required = false,defaultValue = "1")Integer pageNum){
-        Page<OrderListOutDTO> page = orderService.search(orderSearchInDTO,pageNum);
+    public PageOutDTO<OrderListOutDTO> search(OrderSearchInDTO orderSearchInDTO, @RequestParam(required = false, defaultValue = "1") Integer pageNum) {
+        Page<OrderListOutDTO> page = orderService.search(orderSearchInDTO, pageNum);
         PageOutDTO<OrderListOutDTO> pageOutDTO = new PageOutDTO<>();
         pageOutDTO.setTotal(page.getTotal());
         pageOutDTO.setPageSize(page.getPageSize());
@@ -27,18 +27,18 @@ public class OrderController {
     }
 
     @GetMapping("/getById")
-    public OrderShowOutDTO getById(@RequestParam Long orderId){
+    public OrderShowOutDTO getById(@RequestParam Long orderId) {
         OrderShowOutDTO orderShowOutDTO = orderService.getById(orderId);
         return orderShowOutDTO;
     }
 
     @GetMapping("/getInvoiceInfo")
-    public OrderInvoiceShowOutDTO getInvoiceInfo(@RequestParam Long orderId){
+    public OrderInvoiceShowOutDTO getInvoiceInfo(@RequestParam Long orderId) {
         return null;
     }
 
     @GetMapping("/getShipInfo")
-    public OrderShipShowOutDTO getShipInfo(@RequestParam Long orderId){
+    public OrderShipShowOutDTO getShipInfo(@RequestParam Long orderId) {
         return null;
     }
 

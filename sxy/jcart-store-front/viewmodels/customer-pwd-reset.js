@@ -10,7 +10,7 @@ var app = new Vue({
         handleResetPwdClick() {
             console.log('reset pwd click');
 
-            if(this.newPwd !== this.reNewPwd){
+            if (this.newPwd !== this.reNewPwd) {
                 alert('密码不一致');
                 return;
             }
@@ -23,12 +23,12 @@ var app = new Vue({
                 resetCode: this.resetCode,
                 newPwd: this.newPwd
             })
-            .then(function (response){
-                console.log(response);
-                alert('重置成功');
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+                .then(function (response) {
+                    console.log(response);
+                    alert('重置成功');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
         }
-})
+    })

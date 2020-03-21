@@ -32,9 +32,9 @@ public class StaticResourceFilter implements Filter {
         final String[] strings = requestURI.split("\\.");
         String ext = strings[strings.length - 1];
         ext = ext.toLowerCase();
-        if (extensions.contains(ext)){
-            throw new ClientException(ClientExceptionConstant.NOT_SUPPORT_STATIC_RESOURCE_ERRCODE,ClientExceptionConstant.NOT_SUPPORT_STATIC_RESOURCE_ERRMSG);
-        }else {
+        if (extensions.contains(ext)) {
+            throw new ClientException(ClientExceptionConstant.NOT_SUPPORT_STATIC_RESOURCE_ERRCODE, ClientExceptionConstant.NOT_SUPPORT_STATIC_RESOURCE_ERRMSG);
+        } else {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }

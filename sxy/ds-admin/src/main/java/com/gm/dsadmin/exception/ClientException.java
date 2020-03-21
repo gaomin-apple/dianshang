@@ -10,7 +10,7 @@ public class ClientException extends ServletException {
 
     private String errCode;
 
-    public ClientException(String errCode, String errMsg){
+    public ClientException(String errCode, String errMsg) {
         super(errMsg);
         this.errCode = errCode;
     }

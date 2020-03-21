@@ -4,11 +4,11 @@ var app = new Vue({
         pageInfo: {},
         pageNum: 1,
         statuses: [
-            { value: 0, label: '待处理' },
-            { value: 1, label: '待取货' },
-            { value: 2, label: '正在处理' },
-            { value: 3, label: '完成' },
-            { value: 4, label: '拒绝' }
+            {value: 0, label: '待处理'},
+            {value: 1, label: '待取货'},
+            {value: 2, label: '正在处理'},
+            {value: 3, label: '完成'},
+            {value: 4, label: '拒绝'}
         ]
     },
     mounted() {
@@ -17,22 +17,22 @@ var app = new Vue({
     },
     methods: {
         handlePageChange(val) {
-            console.log('page changed',val);
+            console.log('page changed', val);
             this.pageNum = val;
         },
         getMyReturn() {
-            axios.get('/return/getList',{
+            axios.get('/return/getList', {
                 params: {
                     pageNum: this.pageNum
                 }
             })
-            .then(function (response) {
-                console.log(response);
-                app.pageNum = response.data;
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+                .then(function (response) {
+                    console.log(response);
+                    app.pageNum = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     }
 })

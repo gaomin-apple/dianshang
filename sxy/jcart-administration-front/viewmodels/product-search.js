@@ -9,17 +9,17 @@ var app = new Vue({
         stockQuantity: '',
         selectedStatus: '',
         statuses: [
-            { value: 0, label: '下架' },
-            { value: 1, label: '上架' },
-            { value: 2, label: '待审核' }
+            {value: 0, label: '下架'},
+            {value: 1, label: '上架'},
+            {value: 2, label: '待审核'}
         ]
     },
-    mounted(){
+    mounted() {
         console.log('view mounted');
         this.searchProduct();
     },
     methods: {
-             handleSearchClick() {
+        handleSearchClick() {
             console.log('search click');
             this.pageNum = 1;
             this.searchProduct();
@@ -32,29 +32,29 @@ var app = new Vue({
             this.stockQuantity = '';
             this.selectedStatus = '';
         },
-        pageP(val){
-          console.log('page change');
-          this.pageNum = val;
-          this.searchProduct();
+        pageP(val) {
+            console.log('page change');
+            this.pageNum = val;
+            this.searchProduct();
         },
         searchProduct() {
             axios.get('/product/search', {
                 params: {
-                  productCode: this.productCode,
-                  productName: this.productName,
-                  price: this.price,
-                  stockQuantity: this.stockQuantity,
-                  status: this.selectedStatus,
-                  pageNum: this.pageNum
+                    productCode: this.productCode,
+                    productName: this.productName,
+                    price: this.price,
+                    stockQuantity: this.stockQuantity,
+                    status: this.selectedStatus,
+                    pageNum: this.pageNum
                 }
-              })
-              .then(function (response) {
-                console.log(response);
-                app.pageInfo = response.data;
-              })
-              .catch(function (error) {
-                console.log(error);
-              }); 
+            })
+                .then(function (response) {
+                    console.log(response);
+                    app.pageInfo = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     }
 })

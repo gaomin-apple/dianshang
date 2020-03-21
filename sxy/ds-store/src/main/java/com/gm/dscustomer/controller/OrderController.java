@@ -23,13 +23,13 @@ public class OrderController {
 
     @PostMapping("/checkout")
     public Long checkout(@RequestBody OrderCheckoutInDTO orderCheckoutInDTO,
-                            @RequestAttribute Integer customerId){
-        Long orderId = orderService.checkout(orderCheckoutInDTO,customerId);
+                         @RequestAttribute Integer customerId) {
+        Long orderId = orderService.checkout(orderCheckoutInDTO, customerId);
         return orderId;
     }
 
     @GetMapping("/getList")
-    public PageOutDTO<OrderListOutDTO> getList(@RequestParam(required = false,defaultValue = "1") Integer pageNum,@RequestAttribute Integer customerId){
+    public PageOutDTO<OrderListOutDTO> getList(@RequestParam(required = false, defaultValue = "1") Integer pageNum, @RequestAttribute Integer customerId) {
         Page<Order> page = orderService.getByCustomerId(pageNum, customerId);
 
         List<OrderListOutDTO> orderListOutDTOS = page.stream().map(order -> {
@@ -49,8 +49,9 @@ public class OrderController {
 
         return pageOutDTO;
     }
+
     @GetMapping("/getById")
-    public OrderShowOutDTO getById(@RequestParam Long orderId){
+    public OrderShowOutDTO getById(@RequestParam Long orderId) {
         OrderShowOutDTO orderShowOutDTO = orderService.getById(orderId);
         return orderShowOutDTO;
     }

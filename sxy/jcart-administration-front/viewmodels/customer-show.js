@@ -14,9 +14,9 @@ var app = new Vue({
         defaultAddressId: '',
         defaultAddress: '',
         statuses: [
-            {value:0,label:'禁用'},
-            {value:1,label:"启用"},
-            {value:2,label:"不安全"}
+            {value: 0, label: '禁用'},
+            {value: 1, label: "启用"},
+            {value: 2, label: "不安全"}
         ]
     },
     mounted() {
@@ -24,7 +24,7 @@ var app = new Vue({
 
         var url = new URL(location.href);
         this.customerId = url.searchParams.get("customerId");
-        if(!this.customerId){
+        if (!this.customerId) {
             alert('customerId is null');
             return;
         }
@@ -37,24 +37,24 @@ var app = new Vue({
                     customerId: this.customerId
                 }
             })
-            .then(function (response) {
-                console.log(response);
-                var customer = response.data;
-                app.username = customer.username;
-                app.realName = customer.realName;
-                app.avatarUrl = customer.avatarUrl;
-                app.mobile = customer.mobile;
-                app.email = customer.email;
-                app.status = customer.status;
-                app.createTimestamp = customer.createTimestamp;
-                app.newsSubscribed = customer.newsSubscribed;
-                app.rewordPoints = customer.rewordPoints;
-                app.defaultAddressId = customer.defaultAddressId;
-                app.defaultAddress = customer.defaultAddress;
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+                .then(function (response) {
+                    console.log(response);
+                    var customer = response.data;
+                    app.username = customer.username;
+                    app.realName = customer.realName;
+                    app.avatarUrl = customer.avatarUrl;
+                    app.mobile = customer.mobile;
+                    app.email = customer.email;
+                    app.status = customer.status;
+                    app.createTimestamp = customer.createTimestamp;
+                    app.newsSubscribed = customer.newsSubscribed;
+                    app.rewordPoints = customer.rewordPoints;
+                    app.defaultAddressId = customer.defaultAddressId;
+                    app.defaultAddress = customer.defaultAddress;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
         }
     }
 })

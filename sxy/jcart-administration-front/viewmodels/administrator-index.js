@@ -4,7 +4,7 @@ var app = new Vue({
         pageInfo: {},
         pageNum: 1,
         selectedAdministratorIds: [],
-        statuses: ['禁用','启用']
+        statuses: ['禁用', '启用']
     },
     computed: {
         selectedAdministratorIds() {
@@ -17,7 +17,7 @@ var app = new Vue({
     },
     methods: {
         handlePageChange(val) {
-            console.log('page change',val);
+            console.log('page change', val);
             this.pageNum = val;
             this.getAdministrators();
         },

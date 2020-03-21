@@ -40,7 +40,7 @@ public class ReturnController {
         aReturn.setProductName(returnApplyInDTO.getProductName());
         aReturn.setMobile(returnApplyInDTO.getMobile());
         aReturn.setEmail(returnApplyInDTO.getEmail());
-        aReturn.setStatus((byte)ReturnStatus.ToProcess.ordinal());
+        aReturn.setStatus((byte) ReturnStatus.ToProcess.ordinal());
         aReturn.setProductCode(returnApplyInDTO.getProductCode());
         aReturn.setCustomerName(returnApplyInDTO.getCustomerName());
         aReturn.setQuantity(returnApplyInDTO.getQuantity());
@@ -57,8 +57,8 @@ public class ReturnController {
 
     @GetMapping("/getList")
     public PageOutDTO<ReturnListOutDTO> getList(@RequestAttribute Integer customerId,
-                                                @RequestParam(required = false, defaultValue = "1") Integer pageNum){
-        Page<Return> page = returnService.getPageByCustomerId(customerId,pageNum);
+                                                @RequestParam(required = false, defaultValue = "1") Integer pageNum) {
+        Page<Return> page = returnService.getPageByCustomerId(customerId, pageNum);
         List<ReturnListOutDTO> returnListOutDTOS = page.stream().map(aReturn -> {
             ReturnListOutDTO returnListOutDTO = new ReturnListOutDTO();
             returnListOutDTO.setReturnId(aReturn.getReturnId());

@@ -1,15 +1,15 @@
 var app = new Vue({
     el: '#app',
     data: {
-        customerId:'',
+        customerId: '',
         addresses: []
     },
     mounted() {
         console.log('view mounted');
-        
+
         var url = new URL(location.href);
         this.customerId = url.searchParams.get('customerId');
-        if(!this.customerId){
+        if (!this.customerId) {
             alert('customerId id null');
             return;
         }

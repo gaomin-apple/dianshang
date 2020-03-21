@@ -5,7 +5,7 @@ import com.gm.dsadmin.dto.in.ReturnSearchInDTO;
 import com.gm.dsadmin.po.Return;
 
 public interface ReturnService {
-    Page<Return> search(ReturnSearchInDTO returnSearchInDTO,Integer pageNum);
+    Page<Return> search(ReturnSearchInDTO returnSearchInDTO, Integer pageNum);
 
     Return getById(Integer returnId);
 

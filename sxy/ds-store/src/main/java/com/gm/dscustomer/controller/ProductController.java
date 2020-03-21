@@ -18,12 +18,12 @@ public class ProductController {
 
     @GetMapping("/search")
     public PageOutDTO<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO,
-                                                @RequestParam Integer pageNum){
+                                                @RequestParam Integer pageNum) {
         return null;
     }
 
     @GetMapping("/getById")
-    public ProductShowOutDTO getById(@RequestParam Integer productId){
+    public ProductShowOutDTO getById(@RequestParam Integer productId) {
         ProductShowOutDTO productShowOutDTO = productService.getShowById(productId);
         return productShowOutDTO;
     }

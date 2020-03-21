@@ -61,9 +61,9 @@ const ProductSearchRoutePage = {
             stockQuantity: '',
             selectedStatus: '',
             statuses: [
-                { value: 0, label: '下架' },
-                { value: 1, label: '上架' },
-                { value: 2, label: '待审核' }
+                {value: 0, label: '下架'},
+                {value: 1, label: '上架'},
+                {value: 2, label: '待审核'}
             ]
         }
     },
@@ -72,7 +72,7 @@ const ProductSearchRoutePage = {
         this.searchProduct();
     },
     methods: {
-        handleCreateClick(){
+        handleCreateClick() {
             this.$router.push('/product/create');
         },
         handleSearchClick() {

@@ -19,8 +19,8 @@ const ReturnEditRoutePage = {
         return {
             activeIndex: '',
             menuItems: [
-                { name: '退货详情', index: 'show' },
-                { name: '退货历史', index: 'history' }
+                {name: '退货详情', index: 'show'},
+                {name: '退货历史', index: 'history'}
             ]
         }
     },

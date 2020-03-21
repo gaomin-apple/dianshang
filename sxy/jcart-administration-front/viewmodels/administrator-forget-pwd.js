@@ -4,7 +4,7 @@ var app = new Vue({
         email: '',
         loading: false,
         buttonEnabled: true,
-        counter:0
+        counter: 0
     },
     mounted() {
         setInterval(function () {

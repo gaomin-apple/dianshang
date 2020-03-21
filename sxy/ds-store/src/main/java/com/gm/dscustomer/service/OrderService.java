@@ -8,6 +8,7 @@ import com.gm.dscustomer.po.Order;
 public interface OrderService {
     Long checkout(OrderCheckoutInDTO orderCheckoutInDTO,
                   Integer customerId);
+
     Page<Order> getByCustomerId(Integer pageNum, Integer customerId);
 
     OrderShowOutDTO getById(Long orderId);

@@ -8,12 +8,12 @@ var app = new Vue({
         avatarUrl: '',
         selectedStatus: 1,
         statuses: [
-            { value: 0, label: '禁用' },
-            { value: 1, label: '启用' }
+            {value: 0, label: '禁用'},
+            {value: 1, label: '启用'}
         ],
     },
     methods: {
-        handleCreateClick(){
+        handleCreateClick() {
             console.log('create click');
             this.createAdministrator();
         },
@@ -26,13 +26,13 @@ var app = new Vue({
                 avatarUrl: this.avatarUrl,
                 status: this.selectedStatus
             })
-            .then(function (response) {
-                console.log(response);
-                alert('创建成功');
-            })
-            .catch(function (error){
-                console.log(error);
-            })
+                .then(function (response) {
+                    console.log(response);
+                    alert('创建成功');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
         }
     }
 })

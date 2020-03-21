@@ -10,32 +10,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/product")
 public class ProductController {
     @GetMapping("/search")
-    public String search(String productName,String Model,String quantity,Double price){
+    public String search(String productName, String Model, String quantity, Double price) {
         return null;
     }
 
     @PostMapping("/addproduct")
-    public String addproduct(Product product){
+    public String addproduct(Product product) {
         return null;
     }
 
     @GetMapping("/findByAll")
-    public String findByAll(){
+    public String findByAll() {
         return null;
     }
 
     @GetMapping("/findByid")
-    public String show(Integer productid){
+    public String show(Integer productid) {
         return null;
     }
 
     @GetMapping("/findlist")
-    public String list(Integer accountid,Integer orderid){
+    public String list(Integer accountid, Integer orderid) {
         return null;
     }
 
     @PostMapping("/update")
-    public String update(Product product){
+    public String update(Product product) {
         return null;
     }
 }

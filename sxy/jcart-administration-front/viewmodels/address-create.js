@@ -7,7 +7,7 @@ var app = new Vue({
         content: ''
     },
     methods: {
-        handleCreateClick(){
+        handleCreateClick() {
             console.log('create click');
             this.createAddress();
         },

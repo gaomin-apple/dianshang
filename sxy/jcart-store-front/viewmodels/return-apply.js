@@ -12,10 +12,10 @@ var app = new Vue({
         quantity: '',
         reason: '',
         reasons: [
-            { value: 0, label: '发货过期' },
-            { value: 1, label: '订单错误' },
-            { value: 2, label: '收到错误商品' },
-            { value: 3, label: '质量问题' }
+            {value: 0, label: '发货过期'},
+            {value: 1, label: '订单错误'},
+            {value: 2, label: '收到错误商品'},
+            {value: 3, label: '质量问题'}
         ],
         comment: '',
         opened: '',
@@ -30,7 +30,7 @@ var app = new Vue({
 
         var url = new URL(location.href);
         this.orderId = url.searchParams.get("orderId");
-        if(!this.orderId) {
+        if (!this.orderId) {
             alert('orderId is null');
             return;
         }
@@ -42,27 +42,27 @@ var app = new Vue({
             this.applyReturn();
         },
         getOrderById() {
-            axios.get('/order/getById',{
+            axios.get('/order/getById', {
                 params: {
                     orderId: this.orderId
                 }
             })
-            .then(function (response) {
-                console.log(response);
-                var order = response.data;
-                app.orderTime = new Date(order.createTimestamp);
-                var orderProducts = order.orderProducts;
-                var returnProduct = orderProducts.find(p => p.productId == app.productId);
-                app.productCode = returnProduct.productCode;
-                app.productName = returnProduct.productName;
-                app.quantity = returnProduct.quantity;
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+                .then(function (response) {
+                    console.log(response);
+                    var order = response.data;
+                    app.orderTime = new Date(order.createTimestamp);
+                    var orderProducts = order.orderProducts;
+                    var returnProduct = orderProducts.find(p => p.productId == app.productId);
+                    app.productCode = returnProduct.productCode;
+                    app.productName = returnProduct.productName;
+                    app.quantity = returnProduct.quantity;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         },
         applyReturn() {
-            axios.post('/return/apply',{
+            axios.post('/return/apply', {
                 orderId: this.orderId,
                 orderTimestamp: this.orderTimestamp,
                 customerName: this.customerName,
@@ -75,13 +75,13 @@ var app = new Vue({
                 opened: this.opened,
                 comment: this.comment
             })
-            .then(function (response) {
-                console.log(response);
-                alert('申请成功，请等待处理');
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+                .then(function (response) {
+                    console.log(response);
+                    alert('申请成功，请等待处理');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     }
 })

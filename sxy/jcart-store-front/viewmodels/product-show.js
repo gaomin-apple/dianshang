@@ -26,7 +26,7 @@ var app = new Vue({
 
         var url = new URL(location.href);
         this.productId = url.searchParams.get("productId");
-        if(!this.productId){
+        if (!this.productId) {
             alert('productId is null');
             return;
         }
@@ -35,17 +35,17 @@ var app = new Vue({
     methods: {
         handleAddToCartClick() {
             console.log('add to cart click');
-       
+
             var myShopping = localStorage['myShopping'];
             this.myShoppingCart = myShopping ? JSON.parse(myShopping) : [];
 
             var cartProduct = this.myShoppingCart.find(p => p.productId === this.productId);
-            if(cartProduct){
+            if (cartProduct) {
                 console.log('cart product exist');
                 var originQuantity = parseInt(cartProduct.quantity);
                 var addQuantity = parseInt(this.quantity);
                 cartProduct.quantity = originQuantity + addQuantity;
-            }else{
+            } else {
                 cartProduct = {
                     productId: this.productId,
                     productCode: this.productCode,
@@ -63,11 +63,11 @@ var app = new Vue({
             this.$message.success('添加购物车');
         },
         getProductById() {
-            axios.get('/product/getById',{
-                params:{
+            axios.get('/product/getById', {
+                params: {
                     productId: this.productId
                 }
-            }).then(function (response){
+            }).then(function (response) {
                 console.log(response);
                 var product = response.data;
                 app.productId = product.productId;
@@ -80,9 +80,9 @@ var app = new Vue({
                 app.description = product.description;
                 app.stockQuantity = product.stockQuantity;
             })
-            .catch(function (error){
-                console.log(error);
-            });
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     }
 })

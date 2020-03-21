@@ -9,7 +9,7 @@ var app = new Vue({
         stockQuantity: '',
         rewordPoints: '',
         sortOrder: '',
-        productAbstract:'',
+        productAbstract: '',
         description: '',
         selectedStatus: 1,
         selectedMainPic: '',
@@ -17,14 +17,14 @@ var app = new Vue({
         selectedOtherPics: [],
         otherPicUrls: [],
         statuses: [
-            { value: 0, label: '下架' },
-            { value: 1, label: '上架' },
-            { value: 2, label: '待审核' }
+            {value: 0, label: '下架'},
+            {value: 1, label: '上架'},
+            {value: 2, label: '待审核'}
         ],
         mainFileList: [],
         otherFileList: []
     },
-    mounted(){
+    mounted() {
         console.log('view mounted');
 
         var url = new URL(location.href);
@@ -143,8 +143,8 @@ var app = new Vue({
                     app.selectedStatus = product.status;
                     app.rewordPoints = product.rewordPoints;
                     app.sortOrder = product.sortOrder;
-                    app.productAbstract= this.productAbstract,
-                    app.mainPicUrl = product.mainPicUrl;
+                    app.productAbstract = this.productAbstract,
+                        app.mainPicUrl = product.mainPicUrl;
                     app.description = product.description;
                     tinymce.init({
                         selector: '#mytextarea'

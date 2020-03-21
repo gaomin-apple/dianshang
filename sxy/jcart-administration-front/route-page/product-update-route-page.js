@@ -63,9 +63,9 @@ const ProductUpdateRoutePage = {
             selectedOtherPics: [],
             otherPicUrls: [],
             statuses: [
-                { value: 0, label: '下架' },
-                { value: 1, label: '上架' },
-                { value: 2, label: '待审核' }
+                {value: 0, label: '下架'},
+                {value: 1, label: '上架'},
+                {value: 2, label: '待审核'}
             ],
             mainFileList: [],
             otherFileList: []

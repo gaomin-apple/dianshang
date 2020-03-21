@@ -9,44 +9,44 @@ var app = new Vue({
         avatarUrl: '',
         selectedStatus: '',
         statuses: [
-            { value: 0, label: '禁用' },
-            { value: 1, label: '启用' }
+            {value: 0, label: '禁用'},
+            {value: 1, label: '启用'}
         ]
     },
-    mounted(){
+    mounted() {
         console.log('view mounted');
 
         var url = new URL(location.href);
         this.administratorId = url.searchParams.get("administratorId");
-        if(!this.administratorId){
+        if (!this.administratorId) {
             alert('administratorId is null');
             return;
         }
         this.getAdministratorById();
     },
     methods: {
-        handleUpdateClick(){
+        handleUpdateClick() {
             console.log('update click');
             this.updateAdministrator();
         },
-        getAdministratorById(){
+        getAdministratorById() {
             axios.get('/administrator/getById', {
                 params: {
-                  administratorId: this.administratorId
+                    administratorId: this.administratorId
                 }
-              })
-              .then(function (response) {
-                console.log(response);
-                var administrator = response.data;
-                app.username = administrator.username;
-                app.realName = administrator.realName;
-                app.email = administrator.email;
-                app.avatarUrl = administrator.avatarUrl;
-                app.selectedStatus = administrator.status;
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+            })
+                .then(function (response) {
+                    console.log(response);
+                    var administrator = response.data;
+                    app.username = administrator.username;
+                    app.realName = administrator.realName;
+                    app.email = administrator.email;
+                    app.avatarUrl = administrator.avatarUrl;
+                    app.selectedStatus = administrator.status;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         },
         updateAdministrator() {
             axios.post('/administrator/update', {

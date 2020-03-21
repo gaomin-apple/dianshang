@@ -6,7 +6,7 @@ public class AdministratorUpdateInDTO {
     private String password;
     private String email;
     private Byte status;
-    private  String avatarUrl;
+    private String avatarUrl;
 
     public String getAvatarUrl() {
         return avatarUrl;

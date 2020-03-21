@@ -20,8 +20,8 @@ public class OrderHistoryController {
     private OrderHistoryService orderHistoryService;
 
     @GetMapping("/getListByOrderId")
-    public List<OrderHistoryListOutDTO> getListByOrderId(@RequestParam Long orderId){
-        List<OrderHistory> orderHistorys =  orderHistoryService.getByOrderId(orderId);
+    public List<OrderHistoryListOutDTO> getListByOrderId(@RequestParam Long orderId) {
+        List<OrderHistory> orderHistorys = orderHistoryService.getByOrderId(orderId);
 
         List<OrderHistoryListOutDTO> orderHistoryListOutDTOS = orderHistorys.stream().map(orderHistory -> {
             OrderHistoryListOutDTO orderHistoryListOutDTO = new OrderHistoryListOutDTO();
@@ -36,7 +36,7 @@ public class OrderHistoryController {
     }
 
     @PostMapping("/create")
-    public Long create(@RequestBody OrderHistoryCreateInDTO orderHistoryCreateInDTO){
+    public Long create(@RequestBody OrderHistoryCreateInDTO orderHistoryCreateInDTO) {
         OrderHistory orderHistory = new OrderHistory();
         orderHistory.setOrderId(orderHistoryCreateInDTO.getOrderId());
         orderHistory.setTime(new Date());

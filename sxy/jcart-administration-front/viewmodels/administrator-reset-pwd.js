@@ -10,7 +10,7 @@ var app = new Vue({
         handleResetPwdClick() {
             console.log('reset pwd click');
 
-            if(this.newPwd !== this.reNewPwd){
+            if (this.newPwd !== this.reNewPwd) {
                 alert('密码不一致');
                 return;
             }

@@ -5,11 +5,11 @@ var app = new Vue({
         returnHistories: [],
         selectedReturnStatus: '',
         returnStatuses: [
-            { value: 0, label: '待处理' },
-            { value: 1, label: '待取货' },
-            { value: 2, label: '正在处理' },
-            { value: 3, label: '完成' },
-            { value: 4, label: '拒绝' }
+            {value: 0, label: '待处理'},
+            {value: 1, label: '待取货'},
+            {value: 2, label: '正在处理'},
+            {value: 3, label: '完成'},
+            {value: 4, label: '拒绝'}
         ],
         customerNotified: false,
         comment: ''
@@ -32,7 +32,7 @@ var app = new Vue({
             this.createReturnHistory();
         },
         createReturnHistory() {
-            console.log('+++++',this.customerNotified);
+            console.log('+++++', this.customerNotified);
             axios.post('/returnhistory/create', {
                 returnId: this.returnId,
                 returnStatus: this.selectedReturnStatus,

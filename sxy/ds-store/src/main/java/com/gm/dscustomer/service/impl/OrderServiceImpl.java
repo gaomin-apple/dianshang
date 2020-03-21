@@ -87,7 +87,7 @@ public class OrderServiceImpl implements OrderService {
 
         orderDetail.setPayMethod(orderCheckoutInDTO.getPayMethod());
         orderDetail.setInvoicePrice(allTOtalPrice);
-        Address invoiceAddress =  addressService.getById(orderCheckoutInDTO.getInvoiceAddressId());
+        Address invoiceAddress = addressService.getById(orderCheckoutInDTO.getInvoiceAddressId());
         orderDetail.setInvoiceAddress(invoiceAddress.getContent());
 
         orderDetail.setComment(orderCheckoutInDTO.getComment());
@@ -127,7 +127,7 @@ public class OrderServiceImpl implements OrderService {
         List<OrderProductVO> orderProductVOS = JSON.parseArray(orderDetail.getOrderProducts(), OrderProductVO.class);
         orderShowOutDTO.setOrderProducts(orderProductVOS);
 
-        List<OrderHistory> orderHistories  = orderHistoryService.getByOrderId(orderId);
+        List<OrderHistory> orderHistories = orderHistoryService.getByOrderId(orderId);
         List<OrderHistoryListOutDTO> orderHistoryListOutDTOS = orderHistories.stream().map(orderHistory -> {
             OrderHistoryListOutDTO orderHistoryListOutDTO = new OrderHistoryListOutDTO();
             orderHistoryListOutDTO.setTimestamp(orderHistory.getTime().getTime());

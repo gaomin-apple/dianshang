@@ -11,12 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+
 @Service
 public class OrderHistoryServiceImpl implements OrderHistoryService {
     @Autowired
     private OrderHistoryMapper orderHistoryMapper;
     @Autowired
     private OrderService orderService;
+
     @Override
     public List<OrderHistory> getByOrderId(Long orderId) {
         List<OrderHistory> orderHistories = orderHistoryMapper.selectByOrderId(orderId);

@@ -6,10 +6,12 @@ import com.gm.dsadmin.constant.ClientExceptionConstant;
 import com.gm.dsadmin.dto.in.*;
 import com.gm.dsadmin.dto.out.*;
 import com.gm.dsadmin.exception.ClientException;
+import com.gm.dsadmin.mq.EmailEvent;
 import com.gm.dsadmin.po.Administrator;
 import com.gm.dsadmin.service.AdministratorService;
 import com.gm.dsadmin.util.EmailUtil;
 import com.gm.dsadmin.util.JWTUtil;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -39,17 +41,20 @@ public class AdministratorController {
     private SecureRandom secureRandom;
 
     @Autowired
-    private JavaMailSender  mailSender;
+    private JavaMailSender mailSender;
 
     @Value("${spring.mail.username}")
     private String fromEmail;
 
-    private Map<String,String> emailPwdRestCodeMap = new HashMap<>();
+    private Map<String, String> emailPwdRestCodeMap = new HashMap<>();
+
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
 
     @GetMapping("/login")
     public AdministratorLoginOutDTO login(AdministratorLoginInDTO administratorLoginInDTO) throws ClientException {
         Administrator administrator = administratorService.getByUsername(administratorLoginInDTO.getUsername());
-        if (administrator == null){
+        if (administrator == null) {
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_USERNAME_NOT_EXIST_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_USERNAME_NOT_EXIST_ERRMSG);
         }
         String encPwdDB = administrator.getEncryptedPassword();
@@ -58,13 +63,13 @@ public class AdministratorController {
         if (result.verified) {
             AdministratorLoginOutDTO administratorLoginOutDTO = jwtUtil.issueToken(administrator);
             return administratorLoginOutDTO;
-        }else {
+        } else {
             throw new ClientException(ClientExceptionConstant.ADNINISTRATOR_PASSWORD_INVALID_ERRCODE, ClientExceptionConstant.ADNINISTRATOR_PASSWORD_INVALID_ERRMSG);
         }
     }
 
     @GetMapping("/getProfile")
-    public AdministratorGetProfileOutDTO getProfile(@RequestAttribute Integer administratorId){
+    public AdministratorGetProfileOutDTO getProfile(@RequestAttribute Integer administratorId) {
         Administrator administrator = administratorService.getById(administratorId);
         AdministratorGetProfileOutDTO administratorGetProfileOutDTO = new AdministratorGetProfileOutDTO();
         administratorGetProfileOutDTO.setAdministratorId(administrator.getAdministratorId());
@@ -79,7 +84,7 @@ public class AdministratorController {
 
     @PostMapping("/updateProfile")
     public void updateProfile(@RequestBody AdministratorUpdateProfileInDTO administratorUpdateProfileInDTO,
-                              @RequestAttribute Integer administratorId){
+                              @RequestAttribute Integer administratorId) {
         Administrator administrator = new Administrator();
         administrator.setAdministratorId(administratorId);
         administrator.setRealName(administratorUpdateProfileInDTO.getRealName());
@@ -90,29 +95,34 @@ public class AdministratorController {
 
     @PostMapping("/changePwd")
     public void changePwd(@RequestBody AdministratorChangePwdInDTO administratorChangePwdInDTO,
-                          @RequestAttribute Integer administratorId){
+                          @RequestAttribute Integer administratorId) {
 
     }
 
     @GetMapping("/getPwdResetCode")
     public void getPwdResetCode(@RequestParam String email) throws ClientException {
         Administrator administrator = administratorService.getByEmail(email);
-        if (administrator == null){
-            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRCODE,ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRMSG);
+        if (administrator == null) {
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRMSG);
         }
         byte[] bytes = secureRandom.generateSeed(3);
         String hex = DatatypeConverter.printHexBinary(bytes);
-        emailUtil.send(fromEmail,email,"jcart管理员密码重置",hex);
-        emailPwdRestCodeMap.put(email,hex);
+        //emailUtil.send(fromEmail,email,"jcart管理员密码重置",hex);
+        EmailEvent emailEvent = new EmailEvent();
+        emailEvent.setToEmail(email);
+        emailEvent.setTitle("jcart管理员密码重置");
+        emailEvent.setContent(hex);
+        rocketMQTemplate.convertAndSend("SendPwdResetByEmail", emailEvent);
+        emailPwdRestCodeMap.put(email, hex);
     }
 
     @PostMapping("/resetPwd")
     public void resetPwd(@RequestBody AdministratorResetPwdInDTO administratorResetPwdInDTO) throws ClientException {
-       String email = administratorResetPwdInDTO.getEmail();
-       if (email == null){
-           throw new ClientException(ClientExceptionConstant.ADNINISTRATOR_PWDRESET_EMAIL_NONE_ERRCODE,ClientExceptionConstant.ADNINISTRATOR_PWDRESET_EMAIL_NONE_ERRMSG);
-       }
-       String innerResetCode = emailPwdRestCodeMap.get(email);
+        String email = administratorResetPwdInDTO.getEmail();
+        if (email == null) {
+            throw new ClientException(ClientExceptionConstant.ADNINISTRATOR_PWDRESET_EMAIL_NONE_ERRCODE, ClientExceptionConstant.ADNINISTRATOR_PWDRESET_EMAIL_NONE_ERRMSG);
+        }
+        String innerResetCode = emailPwdRestCodeMap.get(email);
         if (innerResetCode == null) {
             throw new ClientException(ClientExceptionConstant.ADNINISTRATOR_PWDRESET_INNER_RESETCODE_NONE_ERRCODE, ClientExceptionConstant.ADNINISTRATOR_PWDRESET_INNER_RESETCODE_NONE_ERRMSG);
         }
@@ -120,26 +130,26 @@ public class AdministratorController {
         if (outerResetCode == null) {
             throw new ClientException(ClientExceptionConstant.ADNINISTRATOR_PWDRESET_OUTER_RESETCODE_NONE_ERRCODE, ClientExceptionConstant.ADNINISTRATOR_PWDRESET_OUTER_RESETCODE_NONE_ERRMSG);
         }
-        if (!outerResetCode.equalsIgnoreCase(innerResetCode)){
+        if (!outerResetCode.equalsIgnoreCase(innerResetCode)) {
             throw new ClientException(ClientExceptionConstant.ADNINISTRATOR_PWDRESET_RESETCODE_INVALID_ERRCODE, ClientExceptionConstant.ADNINISTRATOR_PWDRESET_RESETCODE_INVALID_ERRMSG);
         }
         Administrator administrator = administratorService.getByEmail(email);
-        if (administrator == null){
+        if (administrator == null) {
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRMSG);
         }
 
         String newPwd = administratorResetPwdInDTO.getNewPwd();
-        if (newPwd == null){
+        if (newPwd == null) {
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_NEWPWD_NOT_EXIST_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_NEWPWD_NOT_EXIST_ERRMSG);
         }
-        String bcryptHashString = BCrypt.withDefaults().hashToString(12,newPwd.toCharArray());
+        String bcryptHashString = BCrypt.withDefaults().hashToString(12, newPwd.toCharArray());
         administrator.setEncryptedPassword(bcryptHashString);
         administratorService.update(administrator);
         emailPwdRestCodeMap.remove(email);
     }
 
     @GetMapping("/getList")
-    public PageOutDTO<AdministratorListOutDTO> getList(@RequestParam(required = false,defaultValue = "1") Integer pageNum){
+    public PageOutDTO<AdministratorListOutDTO> getList(@RequestParam(required = false, defaultValue = "1") Integer pageNum) {
         Page<Administrator> page = administratorService.getList(pageNum);
         List<AdministratorListOutDTO> administratorListOutDTOS = page.stream().map(administrator -> {
             AdministratorListOutDTO administratorListOutDTO = new AdministratorListOutDTO();
@@ -159,7 +169,7 @@ public class AdministratorController {
     }
 
     @GetMapping("/getById")
-    public AdministratorShowOutDTO getById(@RequestParam Integer administratorId){
+    public AdministratorShowOutDTO getById(@RequestParam Integer administratorId) {
         Administrator administrator = administratorService.getById(administratorId);
 
         AdministratorShowOutDTO administratorShowOutDTO = new AdministratorShowOutDTO();
@@ -173,7 +183,7 @@ public class AdministratorController {
     }
 
     @PostMapping("/create")
-    public Integer create(@RequestBody AdministratorCreateInDTO administratorCreateInDTO){
+    public Integer create(@RequestBody AdministratorCreateInDTO administratorCreateInDTO) {
         Administrator administrator = new Administrator();
         administrator.setUsername(administratorCreateInDTO.getUsername());
         administrator.setRealName(administratorCreateInDTO.getRealName());
@@ -188,7 +198,7 @@ public class AdministratorController {
     }
 
     @PostMapping("/update")
-    public void update(@RequestBody AdministratorUpdateInDTO administratorUpdateInDTO){
+    public void update(@RequestBody AdministratorUpdateInDTO administratorUpdateInDTO) {
         Administrator administrator = new Administrator();
         administrator.setAdministratorId(administratorUpdateInDTO.getAdministratorId());
         administrator.setRealName(administratorUpdateInDTO.getRealName());
@@ -196,7 +206,7 @@ public class AdministratorController {
         administrator.setAvatarUrl(administratorUpdateInDTO.getAvatarUrl());
         administrator.setStatus(administratorUpdateInDTO.getStatus());
         String password = administratorUpdateInDTO.getPassword();
-        if (password != null && !password.isEmpty()){
+        if (password != null && !password.isEmpty()) {
             String bcryptHashString = BCrypt.withDefaults().hashToString(12, password.toCharArray());
             administrator.setEncryptedPassword(bcryptHashString);
         }
@@ -204,12 +214,12 @@ public class AdministratorController {
     }
 
     @PostMapping("/delete")
-    public void delete(@RequestBody Integer adminstratorId){
+    public void delete(@RequestBody Integer adminstratorId) {
         administratorService.delete(adminstratorId);
     }
 
     @PostMapping("/batchDelete")
-    public void batchDelete(@RequestBody List<Integer> administratorIds){
+    public void batchDelete(@RequestBody List<Integer> administratorIds) {
         administratorService.batchDelete(administratorIds);
     }
 

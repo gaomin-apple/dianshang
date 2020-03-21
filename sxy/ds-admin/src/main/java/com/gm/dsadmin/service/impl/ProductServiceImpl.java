@@ -45,7 +45,7 @@ public class ProductServiceImpl implements ProductService {
        /* String description = productCreateInDTO.getDescription();
         String productAbstract = description.substring(0, Math.min(100, description.length()));
         product.setProductAbstract(productAbstract);*/
-       product.setProductAbstract(productCreateInDTO.getProductAbstract());
+        product.setProductAbstract(productCreateInDTO.getProductAbstract());
         productMapper.insertSelective(product);
 
         Integer productId = product.getProductId();
@@ -57,6 +57,7 @@ public class ProductServiceImpl implements ProductService {
         productDetailMapper.insertSelective(productDetail);
         return productId;
     }
+
     @Override
     @Transactional
     public void update(ProductUpdateInDTO productUpdateInDTO) {

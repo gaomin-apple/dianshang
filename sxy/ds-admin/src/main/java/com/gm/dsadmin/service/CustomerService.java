@@ -6,7 +6,7 @@ import com.gm.dsadmin.dto.in.CustomerSetStatusInDTO;
 import com.gm.dsadmin.po.Customer;
 
 public interface CustomerService {
-    Page<Customer> search(CustomerSearchInDTO customerSearchInDTO ,Integer pageNum);
+    Page<Customer> search(CustomerSearchInDTO customerSearchInDTO, Integer pageNum);
 
     Customer getById(Integer customerId);
 

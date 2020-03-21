@@ -21,6 +21,7 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
     //    custom
     Page<OrderListOutDTO> search(@Param("orderId") Long orderId,
                                  @Param("status") Byte status,

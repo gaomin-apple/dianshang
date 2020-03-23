@@ -1,11 +1,13 @@
 package com.gm.dscustomer.controller;
 
+import com.github.pagehelper.Page;
 import com.gm.dscustomer.dto.in.ProductSearchInDTO;
 import com.gm.dscustomer.dto.out.PageOutDTO;
 import com.gm.dscustomer.dto.out.ProductListOutDTO;
 import com.gm.dscustomer.dto.out.ProductShowOutDTO;
 import com.gm.dscustomer.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,15 +18,25 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
+    @Autowired
+    private KafkaTemplate kafkaTemplate;
+
     @GetMapping("/search")
     public PageOutDTO<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO,
-                                                @RequestParam Integer pageNum) {
-        return null;
+                                                @RequestParam(required = false, defaultValue = "1") Integer pageNum) {
+        Page<ProductListOutDTO> page = productService.search(pageNum);
+        PageOutDTO<ProductListOutDTO> pageOutDTO = new PageOutDTO<>();
+        pageOutDTO.setTotal(page.getTotal());
+        pageOutDTO.setPageSize(page.getPageSize());
+        pageOutDTO.setPageNum(page.getPageNum());
+        pageOutDTO.setList(page);
+        return pageOutDTO;
     }
 
     @GetMapping("/getById")
     public ProductShowOutDTO getById(@RequestParam Integer productId) {
         ProductShowOutDTO productShowOutDTO = productService.getShowById(productId);
+        kafkaTemplate.send("hotproduct",productId);
         return productShowOutDTO;
     }
 

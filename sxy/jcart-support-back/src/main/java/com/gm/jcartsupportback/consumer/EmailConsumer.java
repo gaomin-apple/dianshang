@@ -2,7 +2,6 @@ package com.gm.jcartsupportback.consumer;
 
 import com.gm.jcartsupportback.mq.EmailEvent;
 import com.gm.jcartsupportback.util.EmailUtil;
-import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-@RocketMQMessageListener(topic = "SendPwdResetByEmail",consumerGroup = "jcart-support-group01")
+//@RocketMQMessageListener(topic = "SendPwdResetByEmail",consumerGroup = "jcart-support-group01")
 public class EmailConsumer implements RocketMQListener<EmailEvent> {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());

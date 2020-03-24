@@ -1,14 +1,19 @@
 package com.gm.dscustomer.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.gm.dscustomer.dto.in.ProductSearchInDTO;
 import com.gm.dscustomer.dto.out.PageOutDTO;
 import com.gm.dscustomer.dto.out.ProductListOutDTO;
 import com.gm.dscustomer.dto.out.ProductShowOutDTO;
+import com.gm.dscustomer.mq.HotProductDTO;
+import com.gm.dscustomer.service.ProductOperationService;
 import com.gm.dscustomer.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/product")
@@ -17,6 +22,9 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    private ProductOperationService productOperationService;
 
     @Autowired
     private KafkaTemplate kafkaTemplate;
@@ -36,8 +44,16 @@ public class ProductController {
     @GetMapping("/getById")
     public ProductShowOutDTO getById(@RequestParam Integer productId) {
         ProductShowOutDTO productShowOutDTO = productService.getShowById(productId);
-        kafkaTemplate.send("hotproduct",productId);
+        HotProductDTO hotProductDTO = new HotProductDTO();
+        hotProductDTO.setProductId(productId);
+        hotProductDTO.setProductCode(productShowOutDTO.getProductCode());
+        kafkaTemplate.send("hotproduct", JSON.toJSONString(hotProductDTO));
         return productShowOutDTO;
     }
 
+    @GetMapping("/hot")
+    public List<ProductListOutDTO> hot(){
+
+        return null;
+    }
 }

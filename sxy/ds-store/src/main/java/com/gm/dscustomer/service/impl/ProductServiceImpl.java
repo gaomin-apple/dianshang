@@ -5,8 +5,10 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.gm.dscustomer.dao.ProductDetailMapper;
 import com.gm.dscustomer.dao.ProductMapper;
+import com.gm.dscustomer.dto.in.ProductSearchInDTO;
 import com.gm.dscustomer.dto.out.ProductListOutDTO;
 import com.gm.dscustomer.dto.out.ProductShowOutDTO;
+import com.gm.dscustomer.enumeration.ProductStatus;
 import com.gm.dscustomer.po.Product;
 import com.gm.dscustomer.po.ProductDetail;
 import com.gm.dscustomer.service.ProductService;
@@ -48,9 +50,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<ProductListOutDTO> search(Integer pageNum) {
+    public Page<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO,Integer pageNum) {
         PageHelper.startPage(pageNum, 10);
-        Page<ProductListOutDTO> page = productMapper.search();
+        Page<ProductListOutDTO> page = productMapper.search(productSearchInDTO.getKeyword(),(byte)ProductStatus.OnSales.ordinal());
         return page;
     }
 

@@ -5,11 +5,13 @@ import com.github.pagehelper.Page;
 import com.gm.dscustomer.dto.in.ProductSearchInDTO;
 import com.gm.dscustomer.dto.out.PageOutDTO;
 import com.gm.dscustomer.dto.out.ProductListOutDTO;
+import com.gm.dscustomer.dto.out.ProductOperationOutDTO;
 import com.gm.dscustomer.dto.out.ProductShowOutDTO;
 import com.gm.dscustomer.mq.HotProductDTO;
 import com.gm.dscustomer.service.ProductOperationService;
 import com.gm.dscustomer.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +30,9 @@ public class ProductController {
 
     @Autowired
     private KafkaTemplate kafkaTemplate;
+
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
 
     @GetMapping("/search")
     public PageOutDTO<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO,
@@ -52,8 +57,16 @@ public class ProductController {
     }
 
     @GetMapping("/hot")
-    public List<ProductListOutDTO> hot(){
+    public List<ProductOperationOutDTO> hot(){
 
-        return null;
+        String hotProductsJson = redisTemplate.opsForValue().get("HotProducts");
+        if (hotProductsJson != null){
+            List<ProductOperationOutDTO> productOperations = JSON.parseArray(hotProductsJson, ProductOperationOutDTO.class);
+            return productOperations;
+        }else {
+            List<ProductOperationOutDTO> hotProducts = productOperationService.selectHotProduct();
+            redisTemplate.opsForValue().set("HotProducts",JSON.toJSONString(hotProducts));
+            return hotProducts;
+        }
     }
 }

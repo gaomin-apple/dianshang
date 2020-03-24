@@ -1,12 +1,14 @@
 package com.gm.dscustomer.service.impl;
 
 import com.gm.dscustomer.dao.ProductOperationMapper;
+import com.gm.dscustomer.dto.out.ProductOperationOutDTO;
 import com.gm.dscustomer.po.ProductOperation;
 import com.gm.dscustomer.service.ProductOperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ProductOperationServiceImpl implements ProductOperationService {
@@ -30,5 +32,11 @@ public class ProductOperationServiceImpl implements ProductOperationService {
             productOperation.setRecentTime(new Date());
             productOperationMapper.updateByPrimaryKeySelective(productOperation);
         }
+    }
+
+    @Override
+    public List<ProductOperationOutDTO> selectHotProduct() {
+        List<ProductOperationOutDTO> hotProduct = productOperationMapper.selectHotProduct();
+        return hotProduct;
     }
 }

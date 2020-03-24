@@ -11,6 +11,8 @@ import com.gm.dsadmin.dto.in.ProductSearchInDTO;
 import com.gm.dsadmin.dto.in.ProductUpdateInDTO;
 import com.gm.dsadmin.dto.out.ProductListOutDTO;
 import com.gm.dsadmin.dto.out.ProductShowOutDTO;
+import com.gm.dsadmin.es.doc.ProductDoc;
+import com.gm.dsadmin.es.repo.ProductRepo;
 import com.gm.dsadmin.po.Product;
 import com.gm.dsadmin.po.ProductDetail;
 import com.gm.dsadmin.service.ProductService;
@@ -27,6 +29,8 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductDetailMapper productDetailMapper;
 
+    @Autowired
+    private ProductRepo productRepo;
 
     @Override
     @Transactional
@@ -55,6 +59,13 @@ public class ProductServiceImpl implements ProductService {
         List<String> otherPicUrls = productCreateInDTO.getOtherPicUrls();
         productDetail.setOtherPicUrls(JSON.toJSONString(otherPicUrls));
         productDetailMapper.insertSelective(productDetail);
+
+        ProductDoc productDoc = new ProductDoc();
+        productDoc.setProductId(productId);
+        productDoc.setProductCode(productCreateInDTO.getProductCode());
+        productDoc.setProductName(productCreateInDTO.getProductName());
+        productDoc.setProductAbstract(productCreateInDTO.getProductAbstract());
+        final ProductDoc save = productRepo.save(productDoc);
         return productId;
     }
 

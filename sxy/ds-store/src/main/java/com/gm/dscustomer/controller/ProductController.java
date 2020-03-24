@@ -7,6 +7,8 @@ import com.gm.dscustomer.dto.out.PageOutDTO;
 import com.gm.dscustomer.dto.out.ProductListOutDTO;
 import com.gm.dscustomer.dto.out.ProductOperationOutDTO;
 import com.gm.dscustomer.dto.out.ProductShowOutDTO;
+import com.gm.dscustomer.es.doc.ProductDoc;
+import com.gm.dscustomer.es.repo.ProductRepo;
 import com.gm.dscustomer.mq.HotProductDTO;
 import com.gm.dscustomer.service.ProductOperationService;
 import com.gm.dscustomer.service.ProductService;
@@ -34,9 +36,14 @@ public class ProductController {
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
 
+    @Autowired
+    private ProductRepo productRepo;
+
     @GetMapping("/search")
     public PageOutDTO<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO,
                                                 @RequestParam(required = false, defaultValue = "1") Integer pageNum) {
+        String keyword = productSearchInDTO.getKeyword();
+        List<ProductDoc> productDocs = productRepo.findByProductNameLikeOrproductAbstracLike(keyword,keyword);
         Page<ProductListOutDTO> page = productService.search(productSearchInDTO,pageNum);
         PageOutDTO<ProductListOutDTO> pageOutDTO = new PageOutDTO<>();
         pageOutDTO.setTotal(page.getTotal());
